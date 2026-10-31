@@ -1,143 +1,93 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
+<!DOCTYPE html><html lang="en"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>ONE ROOF by AWF — Exceptional Properties. Exclusive Auctions.</title>
 <script src="https://cdn.tailwindcss.com"></script>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Inter:wght@300;400&display=swap" rel="stylesheet">
 <style>
 body{font-family:'Inter',sans-serif;background:#0A0A0A;color:#E8DCC6}
 .serif{font-family:'Cormorant Garamond',serif}
 .gold{color:#C9A96E}.bg-gold{background:#C9A96E}.border-gold{border-color:rgba(201,169,110,0.25)}
 .hover-gold:hover{background:#C9A96E;color:#000}
+.tab-active{border-bottom:1px solid #C9A96E;color:#C9A96E}.tab-idle{opacity:0.45}
 </style>
-</head>
-<body class="antialiased">
+</head><body class="antialiased">
 
-<!-- HEADER EXACT LIKE IMAGE -->
 <header class="border-b border-gold sticky top-0 bg-[#0A0A0A]/95 backdrop-blur z-50">
 <div class="max-w-[1600px] mx-auto px-8 py-6 flex justify-between items-center">
-<div class="serif">
+<div class="serif cursor-pointer" onclick="window.scrollTo({top:0,behavior:'smooth'})">
 <div class="text-[32px] tracking-[0.15em] font-light leading-none">ONE ROOF</div>
 <div class="text-[13px] tracking-[0.3em] font-light opacity-60 ml-[2px]">by AWF</div>
 </div>
-<nav class="hidden lg:flex gap-6 text-[11px] tracking-[0.2em] text-[#C9A96E]/80">
-<a class="hover:text-[#C9A96E]">LISTINGS</a><span class="opacity-30">·</span>
-<a class="hover:text-[#C9A96E]">LIVE AUCTIONS</a><span class="opacity-30">·</span>
-<a class="hover:text-[#C9A96E]">CITIES</a><span class="opacity-30">·</span>
-<a class="hover:text-[#C9A96E]">SELL WITH US</a><span class="opacity-30">·</span>
-<a class="hover:text-[#C9A96E]">JOURNAL</a><span class="opacity-30">·</span>
-<a class="hover:text-[#C9A96E]">SIGN IN</a>
+<nav class="hidden lg:flex gap-6 text-[11px] tracking-[0.2em] text-[#C9A96E]/80 items-center">
+<button onclick="switchTab('mall')" class="hover:text-[#C9A96E]">LISTINGS</button><span class="opacity-30">·</span>
+<button onclick="switchTab('live')" class="hover:text-[#C9A96E] text-[#C9A96E]">LIVE AUCTIONS</button><span class="opacity-30">·</span>
+<button onclick="openModal('cities')" class="hover:text-[#C9A96E]">CITIES</button><span class="opacity-30">·</span>
+<button onclick="openModal('sell')" class="hover:text-[#C9A96E]">SELL WITH US</button><span class="opacity-30">·</span>
+<button onclick="openModal('journal')" class="hover:text-[#C9A96E]">JOURNAL</button><span class="opacity-30">·</span>
+<button onclick="openModal('signin')" class="border border-gold px-4 py-1.5 hover:bg-[#C9A96E] hover:text-black">SIGN IN</button>
 </nav>
-<div class="lg:hidden text-[11px] tracking-widest">MENU</div>
+<button onclick="openModal('menu')" class="lg:hidden text-[11px] tracking-widest border border-gold px-3 py-1">MENU</button>
 </div>
 </header>
 
-<!-- HERO EXACT LIKE IMAGE -->
-<section class="text-center pt-24 pb-16 px-6 max-w-6xl mx-auto">
-<h1 class="serif text-[42px] md:text-[64px] font-light leading-[0.95] tracking-[-0.02em]">
-Exceptional Properties. Exclusive Auctions.
-</h1>
-<p class="mt-8 text-[14px] md:text-[15px] leading-relaxed text-[#E8DCC6]/60 max-w-3xl mx-auto font-light tracking-wide">
-Curated real estate auctions for the discerning collector. Bidding live now on the world's most sought-after estates. One platform, every price band, one roof — 20K listings and 1B+ NGN assets for KYC-verified bidders.
-</p>
-<div class="mt-12 flex flex-col md:flex-row justify-center gap-4">
-<button onclick="document.getElementById('live').scrollIntoView({behavior:'smooth'})" class="serif px-12 py-4 border border-gold text-[#C9A96E] text-[16px] italic tracking-wide hover-gold transition">Explore Live Auctions</button>
-<button onclick="document.getElementById('mall').scrollIntoView({behavior:'smooth'})" class="serif px-12 py-4 border border-white/20 text-[#E8DCC6]/80 text-[16px] italic tracking-wide hover:bg-white hover:text-black transition">View 20,000+ Listings</button>
+<section class="text-center pt-24 pb-10 px-6 max-w-6xl mx-auto">
+<h1 class="serif text-[42px] md:text-[64px] font-light leading-[0.95] tracking-[-0.02em]">Exceptional Properties. Exclusive Auctions.</h1>
+<p class="mt-8 text-[14px] leading-relaxed text-[#E8DCC6]/60 max-w-3xl mx-auto font-light tracking-wide">Curated for collectors. 20,000 listings under one roof + 500M+ NGN live video auctions only. Two separate worlds, one roof — Mall never mixes with Auction.</p>
+<div class="mt-10 flex flex-col md:flex-row justify-center gap-4">
+<button onclick="switchTab('live')" class="serif px-12 py-4 border border-gold text-[#C9A96E] italic hover:bg-[#C9A96E] hover:text-black transition">Explore Live Auctions</button>
+<button onclick="switchTab('mall')" class="serif px-12 py-4 border border-white/20 text-[#E8DCC6]/80 italic hover:bg-white hover:text-black transition">View 20,000+ Listings</button>
 </div>
-
-<!-- STATS EXACT LIKE IMAGE -->
-<div class="mt-20 grid grid-cols-3 border-y border-gold py-10">
-<div class="text-center"><p class="serif text-[28px] font-light">20,000+</p><p class="text-[11px] tracking-[0.2em] mt-1">LISTINGS</p><p class="text-[11px] text-[#C9A96E]/60 mt-1">Verified Luxury Properties</p></div>
-<div class="text-center border-x border-gold"><p class="serif text-[28px] font-light">1B+</p><p class="text-[11px] tracking-[0.2em] mt-1">LIVE AUCTIONS</p><p class="text-[11px] text-[#C9A96E]/60 mt-1">Total Auction Volume</p></div>
-<div class="text-center"><p class="serif text-[28px] font-light">150+</p><p class="text-[11px] tracking-[0.2em] mt-1">CITIES GLOBAL</p><p class="text-[11px] text-[#C9A96E]/60 mt-1">North America · Europe · Asia · ME</p></div>
+<div class="mt-16 grid grid-cols-3 border-y border-gold py-8">
+<div class="text-center"><p class="serif text-[28px]">20,000+</p><p class="text-[11px] tracking-[0.2em]">LISTINGS</p><p class="text-[10px] text-[#C9A96E]/60 mt-1">Mall Only (20M-499M)</p></div>
+<div class="text-center border-x border-gold"><p class="serif text-[28px]">500M+</p><p class="text-[11px] tracking-[0.2em]">AUCTION ONLY</p><p class="text-[10px] text-[#C9A96E]/60 mt-1">Never Mix With Mall</p></div>
+<div class="text-center"><p class="serif text-[28px]">150+</p><p class="text-[11px] tracking-[0.2em]">CITIES</p><p class="text-[10px] text-[#C9A96E]/60 mt-1">Abuja · Dubai · London</p></div>
 </div>
 </section>
 
-<!-- LIVE NOW FEATURED AUCTIONS EXACT LIKE IMAGE -->
-<section id="live" class="px-8 max-w-[1600px] mx-auto pb-24">
-<div class="flex items-center gap-6 mb-14">
-<div class="h-px flex-1 bg-gold"></div>
-<p class="text-[12px] tracking-[0.3em] text-[#C9A96E]/80">LIVE NOW — FEATURED AUCTIONS</p>
-<div class="h-px flex-1 bg-gold"></div>
+<!-- TOGGLE NEVER MIX -->
+<div class="max-w-[1600px] mx-auto px-8 flex justify-center gap-10 border-b border-gold/20 py-4 sticky top-[85px] bg-[#0A0A0A] z-40">
+<button id="tab-live" onclick="switchTab('live')" class="tab-active serif text-[18px] tracking-wide pb-2">🔴 LIVE AUCTIONS — 500M+ ONLY</button>
+<button id="tab-mall" onclick="switchTab('mall')" class="tab-idle serif text-[18px] tracking-wide pb-2">MALL — NORMAL (20M-499M)</button>
 </div>
 
-<div class="grid md:grid-cols-3 gap-10">
-<!-- Card 1 Guzape -->
-<div class="group cursor-pointer" onclick="openAuction('Guzape 1.3B')">
-<div class="aspect-[4/3] bg-[#151515] relative overflow-hidden">
-<img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1000" class="w-full h-full object-cover group-hover:scale-[1.03] transition duration-700">
-<div class="absolute top-4 left-4 bg-black/80 backdrop-blur px-3 py-1.5 text-[11px] tracking-widest border border-white/10">LIVE · 12:04:21</div>
-<div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent opacity-0 group-hover:opacity-100 transition"><p class="text-[11px] tracking-widest text-[#C9A96E]">VIEW LIVE VIDEO →</p></div>
-</div>
-<div class="bg-[#111] p-6 text-center">
-<h3 class="serif text-[18px] font-light">Guzape Smart 5BR, Abuja — 1.3B NGN</h3>
-<p class="text-[12px] text-[#E8DCC6]/50 mt-3 tracking-wide">Current bid · 1.18B NGN · 14 bids · Reserve Met ✓</p>
-</div>
-</div>
-
-<!-- Card 2 Asokoro -->
-<div class="group cursor-pointer" onclick="openAuction('Asokoro 2.1B')">
-<div class="aspect-[4/3] bg-[#151515] relative overflow-hidden">
-<img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1000" class="w-full h-full object-cover group-hover:scale-[1.03] transition duration-700">
-<div class="absolute top-4 left-4 bg-black/80 backdrop-blur px-3 py-1.5 text-[11px] tracking-widest border border-white/10">LIVE · 06:32:10</div>
-</div>
-<div class="bg-[#111] p-6 text-center">
-<h3 class="serif text-[18px] font-light">Asokoro 6BR Mansion — 2.1B NGN</h3>
-<p class="text-[12px] text-[#E8DCC6]/50 mt-3 tracking-wide">Current bid · 1.95B NGN · 9 bids</p>
-</div>
-</div>
-
-<!-- Card 3 Banana -->
-<div class="group cursor-pointer" onclick="openAuction('Banana 5.2B')">
-<div class="aspect-[4/3] bg-[#151515] relative overflow-hidden">
-<img src="https://images.unsplash.com/photo-1600607688969-a5bfcd646154?w=1000" class="w-full h-full object-cover group-hover:scale-[1.03] transition duration-700">
-<div class="absolute top-4 left-4 bg-black/80 backdrop-blur px-3 py-1.5 text-[11px] tracking-widest border border-white/10">LIVE · 03:18:55</div>
-</div>
-<div class="bg-[#111] p-6 text-center">
-<h3 class="serif text-[18px] font-light">Banana Island Waterfront — 5.2B NGN</h3>
-<p class="text-[12px] text-[#E8DCC6]/50 mt-3 tracking-wide">Current bid · 4.9B NGN · 22 bids · KYC Only</p>
-</div>
-</div>
+<!-- LIVE AUCTIONS 500M+ ONLY -->
+<section id="live" class="px-8 max-w-[1600px] mx-auto py-12">
+<div class="flex items-center gap-6 mb-12"><div class="h-px flex-1 bg-[#C9A96E]/20"></div><p class="text-[11px] tracking-[0.3em]">LIVE NOW — 500M+ NEVER MIXES WITH MALL</p><div class="h-px flex-1 bg-[#C9A96E]/20"></div></div>
+<div class="grid md:grid-cols-3 gap-8">
+<div class="group cursor-pointer bg-[#111] border border-gold/30 hover:border-gold"><div class="aspect-[4/3] relative overflow-hidden"><img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1000" class="w-full h-full object-cover group-hover:scale-105 duration-700"><div class="absolute top-4 left-4 bg-red-600 px-3 py-1 text-[11px] animate-pulse">LIVE · 12:04:21</div><div class="absolute top-4 right-4 bg-black/80 px-2 py-1 text-[10px]">500M+ ONLY</div></div><div class="p-6 text-center"><h3 class="serif text-[18px]">Guzape Smart 5BR — 1.3B NGN</h3><p class="text-[12px] opacity-50 mt-2">Current 1.18B · 14 bids · Reserve Met ✓</p><div class="grid grid-cols-2 gap-2 mt-5"><button onclick="joinVideo('Guzape 1.3B')" class="bg-gold text-black py-3 text-[11px] tracking-widest">JOIN LIVE VIDEO</button><button onclick="placeBid('Guzape')" class="border border-gold py-3 text-[11px]">+100M BID</button></div></div></div>
+<div class="group bg-[#111] border border-white/5"><div class="aspect-[4/3] relative overflow-hidden"><img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1000" class="w-full h-full object-cover"><div class="absolute top-4 left-4 bg-red-600 px-3 py-1 text-[11px]">LIVE · 06:32:10</div></div><div class="p-6 text-center"><h3 class="serif text-[18px]">Asokoro 6BR — 2.1B NGN</h3><p class="text-[12px] opacity-50 mt-2">Current 1.95B · 9 bids</p><div class="grid grid-cols-2 gap-2 mt-5"><button onclick="joinVideo('Asokoro 2.1B')" class="bg-gold text-black py-3 text-[11px]">JOIN LIVE VIDEO</button><button onclick="placeBid('Asokoro')" class="border border-gold py-3 text-[11px]">+100M BID</button></div></div></div>
+<div class="group bg-[#111] border border-white/5"><div class="aspect-[4/3] relative overflow-hidden"><img src="https://images.unsplash.com/photo-1600607688969-a5bfcd646154?w=1000" class="w-full h-full object-cover"><div class="absolute top-4 left-4 bg-red-600 px-3 py-1 text-[11px]">LIVE · 03:18:55</div></div><div class="p-6 text-center"><h3 class="serif text-[18px]">Banana Island — 5.2B NGN</h3><p class="text-[12px] opacity-50 mt-2">Current 4.9B · 22 bids · KYC Only</p><div class="grid grid-cols-2 gap-2 mt-5"><button onclick="joinVideo('Banana 5.2B')" class="bg-gold text-black py-3 text-[11px]">JOIN LIVE VIDEO</button><button onclick="placeBid('Banana')" class="border border-gold py-3 text-[11px]">+100M BID</button></div></div></div>
 </div>
 </section>
 
-<!-- 20K MALL SECTION (Hidden luxury mall) -->
-<section id="mall" class="border-t border-gold bg-[#080808] py-20 px-8">
-<div class="max-w-[1600px] mx-auto">
-<h2 class="serif text-[36px] font-light">Mall — 20,000 Listings Under One Roof</h2>
-<p class="text-[13px] text-[#E8DCC6]/50 mt-2 tracking-wide">Under 1B assets auto-stay here. Over 1B auto-move to auction.</p>
-<div id="mallGrid" class="grid md:grid-cols-4 gap-6 mt-10"></div>
-</div>
+<!-- MALL NORMAL PROPERTIES 20M-499M -->
+<section id="mall" class="border-t border-gold bg-[#080808] py-16 px-8 hidden">
+<div class="max-w-[1600px] mx-auto"><div class="flex justify-between items-end flex-wrap gap-4"><div><h2 class="serif text-[36px] font-light">Mall — 20,000 Listings Under One Roof</h2><p class="text-[13px] opacity-50 mt-2">Normal properties 20M-499M — Never goes to auction — Direct sale & rent</p></div><div class="flex gap-2"><button onclick="filterMall('all')" id="f-all" class="px-4 py-2 bg-gold text-black text-[11px]">ALL</button><button onclick="filterMall('rent')" id="f-rent" class="px-4 py-2 border border-gold text-[11px]">RENT</button><button onclick="filterMall('sale')" id="f-sale" class="px-4 py-2 border border-gold text-[11px]">SALE</button></div></div><div id="mallGrid" class="grid md:grid-cols-4 gap-6 mt-10"></div></div>
 </section>
 
-<!-- FOOTER WITH YOUR REAL CONTACTS -->
-<footer class="border-t border-gold py-12 px-8 text-center">
-<p class="text-[11px] tracking-[0.25em] text-[#C9A96E]/60">ONE ROOF by AWF · Founded 2024 · Trusted by collectors worldwide</p>
-<p class="text-[12px] tracking-wide mt-4 text-[#E8DCC6]">awfrealestatelimited@gmail.com · 08102837598 · Abuja · Dubai · London</p>
-<p class="text-[10px] tracking-widest mt-3 text-[#E8DCC6]/30">PRIVACY · TERMS · CONTACT · ADMIN</p>
-</footer>
+<div id="modal" class="fixed inset-0 bg-black/85 backdrop-blur hidden z-[100] flex items-center justify-center p-6"><div class="bg-[#111] border border-gold max-w-md w-full p-8 text-center"><h3 id="mTitle" class="serif text-[24px]"></h3><p id="mText" class="text-[13px] opacity-70 mt-4 leading-relaxed"></p><div id="mActions" class="mt-6"></div><button onclick="closeModal()" class="mt-6 text-[11px] opacity-40">CLOSE ✕</button></div></div>
+
+<footer class="border-t border-gold py-12 px-8 text-center"><p class="text-[11px] tracking-[0.25em] opacity-50">ONE ROOF by AWF · Founded 2024 · Two separate worlds — Mall (20M-499M) · Auction (500M+)</p><p class="text-[12px] mt-4">awfrealestatelimited@gmail.com · 08102837598 · Abuja · Dubai · London</p></footer>
 
 <script>
-let assets=[
-{id:1,title:"Guzape Smart 5BR + Pool + Elevator",price:"1.3B",city:"Guzape, Abuja"},
-{id:2,title:"Asokoro 6BR Luxury Mansion",price:"2.1B",city:"Asokoro"},
-{id:3,title:"Maitama 8BR Presidential Villa",price:"4.5B",city:"Maitama"},
-{id:4,title:"Wuye 4BR Terrace Quick Sale",price:"320M",city:"Wuye"},
-{id:5,title:"Lugbe 3BR Bungalow",price:"45M",city:"Lugbe"},
-{id:6,title:"Eden Golf Views 1BR Ajman",price:"575k AED",city:"UAE"}
+let mallAssets=[
+{t:"Wuye 4BR Terrace Quick Sale",p:"320M",c:"Wuye, Abuja",ty:"sale",img:"https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=600"},
+{t:"Lugbe 3BR Bungalow",p:"45M",c:"Lugbe",ty:"sale",img:"https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=600"},
+{t:"Jahi 3BR Flat",p:"85M",c:"Jahi",ty:"sale",img:"https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600"},
+{t:"Kubwa 2BR Apartment",p:"1.2M/yr",c:"Kubwa",ty:"rent",img:"https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?w=600"},
+{t:"Gwarimpa 4BR Duplex",p:"180M",c:"Gwarimpa",ty:"sale",img:"https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600"},
+{t:"Mabushi 2BR Flat",p:"800k/yr",c:"Mabushi",ty:"rent",img:"https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=600"},
+{t:"Life Camp 4BR Terrace",p:"250M",c:"Life Camp",ty:"sale",img:"https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=600"},
+{t:"Kado 3BR Apartment",p:"95M",c:"Kado",ty:"sale",img:"https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=600"},
 ];
-function renderMall(){
-document.getElementById('mallGrid').innerHTML=assets.filter(a=>!a.price.includes('B')||parseFloat(a.price)<1).map(a=>`
-<div class="bg-[#111] border border-white/5 p-5 hover:border-gold/30 transition">
-<p class="serif text-[16px]">${a.title}</p>
-<p class="text-[11px] text-[#C9A96E]/60 mt-2">${a.city} · ${a.price}</p>
-<button onclick="window.open('https://wa.me/2348102837598?text=Hi AWF, I want ${a.title}')" class="mt-4 w-full py-2 border border-white/10 text-[11px] tracking-widest hover:bg-white hover:text-black">ENQUIRE</button>
-</div>`).join('')+assets.filter(a=>a.price.includes('B')).slice(0,1).map(a=>`
-<div class="bg-[#111] border border-[#C9A96E]/20 p-5"><p class="serif text-[16px]">${a.title}</p><p class="text-[11px] text-[#C9A96E] mt-2">Over 1B → Auto Auction</p></div>`).join('');
-}
-function openAuction(name){alert(name+' Live Auction Opens — Video + Bidding + Timer. Connects to your YouTube Live. KYC 10M deposit to bid. Contact: 08102837598');}
+function renderMall(){document.getElementById('mallGrid').innerHTML=mallAssets.map(a=>`<div data-type="${a.ty}" class="bg-[#111] border border-white/5 hover:border-gold/30 transition"><img src="${a.img}" class="w-full h-44 object-cover"><div class="p-5"><p class="serif text-[16px]">${a.t}</p><p class="text-[11px] text-[#C9A96E]/60 mt-2">${a.c} · ${a.p}</p><p class="text-[10px] opacity-30 mt-1">Mall Only — Not Auction (Under 500M)</p><button onclick="enquire('${a.t} ${a.p}')" class="mt-4 w-full py-2.5 border border-white/10 text-[11px] tracking-widest hover:bg-white hover:text-black">ENQUIRE</button><button onclick="whatsapp('Enquiry: ${a.t}')" class="mt-2 w-full py-2 text-[10px] opacity-40">WhatsApp 08102837598</button></div></div>`).join('');}
+function switchTab(t){document.getElementById('live').classList.toggle('hidden',t!=='live');document.getElementById('mall').classList.toggle('hidden',t!=='mall');document.getElementById('tab-live').className=t=='live'?'tab-active serif text-[18px] pb-2':'tab-idle serif text-[18px] pb-2';document.getElementById('tab-mall').className=t=='mall'?'tab-active serif text-[18px] pb-2':'tab-idle serif text-[18px] pb-2';document.getElementById(t).scrollIntoView({behavior:'smooth'});}
+function filterMall(type){document.querySelectorAll('#mallGrid [data-type]').forEach(el=>el.style.display=(type=='all'||el.dataset.type==type)?'block':'none');document.getElementById('f-all').className=type=='all'?'px-4 py-2 bg-gold text-black text-[11px]':'px-4 py-2 border border-gold text-[11px]';document.getElementById('f-rent').className=type=='rent'?'px-4 py-2 bg-gold text-black text-[11px]':'px-4 py-2 border border-gold text-[11px]';document.getElementById('f-sale').className=type=='sale'?'px-4 py-2 bg-gold text-black text-[11px]':'px-4 py-2 border border-gold text-[11px]';}
+function joinVideo(n){openModal('LIVE VIDEO ROOM — '+n,'YouTube Live + Private Video + Timer + Live Chat.<br><br>12-22 KYC billionaires watching now.<br><br>To enter: 10M deposit + KYC via 08102837598','<button onclick="whatsapp(\'JOIN VIDEO: '+n+'\')" class="w-full bg-gold text-black py-3 text-[12px]">GET PRIVATE LINK ON WHATSAPP</button>');}
+function placeBid(n){openModal('Place +100M Bid — '+n,'Minimum increment 100M NGN.<br>Deposit 10M required.<br>NDA protected.<br>','<button onclick="whatsapp(\'BID '+n+' +100M\')" class="w-full bg-gold text-black py-3 text-[12px]">CONFIRM BID ON WHATSAPP</button>');}
+function enquire(n){whatsapp('Enquiry: '+n);}
+function whatsapp(m){window.open('https://wa.me/2348102837598?text='+encodeURIComponent(m+' — from ONE ROOF by AWF — Email: awfrealestatelimited@gmail.com'),'_blank');}
+function openModal(a,b,c,d){if(a=='cities')return openModal('150+ Cities Global','Abuja (Guzape, Asokoro, Maitama, Wuye, Jahi, Gwarimpa) · Lagos (Banana, Ikoyi) · Dubai Hills · London Mayfair · More cities opening.','<button onclick="whatsapp(\'List my city\')" class="w-full bg-gold text-black py-3 text-[12px]">LIST IN MY CITY</button>');if(a=='sell')return openModal('Sell With Us — One Roof','We take ALL properties 20M-499M to MALL, and 500M+ to PRIVATE AUCTION. Two worlds never mix. That is the funnel that brings billionaires.<br><br>Commission 5%.','<button onclick="whatsapp(\'I want to sell\')" class="w-full bg-gold text-black py-3 text-[12px]">SELL MY PROPERTY — 08102837598</button>');if(a=='journal')return openModal('Journal','Coming: Billionaire estate stories, off-market deals, auction results. Email: awfrealestatelimited@gmail.com','');if(a=='signin')return openModal('Sign In — Members Only','KYC required. Deposit 10M for auction. Mall is free.','<button onclick="whatsapp(\'Request Access\')" class="w-full bg-gold text-black py-3 text-[12px]">REQUEST ACCESS</button>');if(a=='menu')return openModal('Menu','All buttons now work.','<div class="grid gap-2"><button onclick="switchTab(\'mall\');closeModal()" class="w-full border border-gold py-3 text-[11px]">MALL — 20K LISTINGS (20M-499M)</button><button onclick="switchTab(\'live\');closeModal()" class="w-full bg-gold text-black py-3 text-[11px]">AUCTIONS — 500M+ ONLY</button></div>');document.getElementById('mTitle').innerHTML=a;document.getElementById('mText').innerHTML=b;document.getElementById('mActions').innerHTML=c||d||'';if(d){document.getElementById('mActions').innerHTML=d;document.getElementById('mText').innerHTML=b;}document.getElementById('modal').classList.remove('hidden');}
+function closeModal(){document.getElementById('modal').classList.add('hidden');}
 renderMall();
-</script>
-</body>
-</html>
+</script></body></html>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ONE ROOF by AWF - Exceptional Properties</title>
+<title>ONE ROOF by AWF - Dynamic Holographic V6</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.160.0/three.min.js"></script>
 <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js"></script>
@@ -11,150 +11,117 @@
 <style>
 body{font-family:'Inter',sans-serif;background:#0a0a0a;color:#e8dcc6}
 .serif{font-family:'Cormorant Garamond',serif}
-.card-hover{transition:all 0.4s ease}.card-hover:hover{transform:translateY(-4px);box-shadow:0 20px 40px rgba(212,194,160,0.15)}
-#wireCanvas{width:100%!important;height:520px!important;display:block}
+.card-hover{transition:all 0.4s ease}.card-hover:hover{transform:translateY(-4px)}
+#wireCanvas{width:100%!important;height:560px!important;display:block}
 </style>
 </head>
 <body class="bg-[#0a0a0a]">
-
 <header class="sticky top-0 z-50 bg-[#0a0a0a]/90 backdrop-blur border-b border-[#d4c2a0]/20 px-6 lg:px-12 py-5 flex justify-between items-center">
-<div>
-<h1 class="serif text-[28px] lg:text-[32px] tracking-[0.15em] text-[#d4c2a0] font-medium leading-none">ONE ROOF</h1>
-<p class="serif text-[14px] tracking-[0.2em] text-[#d4c2a0]/70 ml-12 -mt-1">by AWF</p>
-</div>
-<nav class="hidden md:flex gap-6 text-[11px] tracking-[0.15em] text-[#d4c2a0]/80">
-<a href="#listings">LISTINGS</a><span>•</span>
-<a href="#auctions">LIVE AUCTIONS</a><span>•</span>
-<a href="#cities">CITIES</a><span>•</span>
-<a href="#">SELL WITH US</a><span>•</span>
-<a href="#">JOURNAL</a><span>•</span>
-<a href="admin.html">SIGN IN</a>
-</nav>
+<div><h1 class="serif text-[28px] tracking-[0.15em] text-[#d4c2a0] font-medium leading-none">ONE ROOF</h1><p class="serif text-[14px] tracking-[0.2em] text-[#d4c2a0]/70 ml-12 -mt-1">by AWF</p></div>
+<nav class="hidden md:flex gap-6 text-[11px] tracking-[0.15em] text-[#d4c2a0]/80"><a href="#">LISTINGS</a><span>•</span><a href="#">LIVE AUCTIONS</a><span>•</span><a href="#">CITIES</a><span>•</span><a href="admin.html" class="bg-[#d4c2a0]/20 px-3 py-1 rounded-full">SIGN IN</a></nav>
 </header>
-
-<section class="px-6 lg:px-12 py-16 lg:py-20 text-center border-b border-[#d4c2a0]/10" style="background:radial-gradient(ellipse at center,#1a1a12 0%,#0a0a0a 70%)">
-<h2 class="serif text-[32px] lg:text-[48px] leading-[1.1] text-[#d4c2a0] font-medium max-w-3xl mx-auto">Exceptional Properties. Exclusive Auctions.</h2>
-<p class="text-[13px] lg:text-[14px] text-[#e8dcc6]/70 mt-4 max-w-2xl mx-auto">Curated real estate auctions for the discerning collector. Bidding live now on the world's most sought-after estates.</p>
-<div class="flex flex-col sm:flex-row justify-center gap-4 mt-8 max-w-xl mx-auto">
-<button onclick="document.getElementById('auctions').scrollIntoView({behavior:'smooth'})" class="serif border border-[#d4c2a0]/50 px-8 py-3 text-[15px] text-[#d4c2a0] hover:bg-[#d4c2a0]/10">Explore Live Auctions</button>
-<button onclick="document.getElementById('listings').scrollIntoView({behavior:'smooth'})" class="serif border border-[#d4c2a0]/50 px-8 py-3 text-[15px] text-[#d4c2a0] hover:bg-[#d4c2a0]/10">View 20,000+ Listings</button>
+<section class="px-6 lg:px-12 py-16 text-center border-b border-[#d4c2a0]/10" style="background:radial-gradient(ellipse at center,#1a1a12 0%,#0a0a0a 70%)">
+<h2 class="serif text-[36px] lg:text-[48px] leading-[1.1] text-[#d4c2a0] font-medium max-w-3xl mx-auto">Exceptional Properties. Exclusive Auctions.</h2>
+<p class="text-[13px] text-[#e8dcc6]/70 mt-4 max-w-2xl mx-auto">Curated real estate auctions for the discerning collector.</p>
+<div class="grid grid-cols-3 gap-6 mt-10 max-w-3xl mx-auto border-y border-[#d4c2a0]/20 py-6">
+<div class="text-center"><p class="serif text-[20px] font-semibold">20,000+</p><p class="text-[10px] tracking-[0.15em] text-[#d4c2a0]">LISTINGS</p></div>
+<div class="text-center border-x border-[#d4c2a0]/10"><p class="serif text-[20px] font-semibold">1B+</p><p class="text-[10px] tracking-[0.15em] text-[#d4c2a0]">LIVE AUCTIONS</p></div>
+<div class="text-center"><p class="serif text-[20px] font-semibold">150+</p><p class="text-[10px] tracking-[0.15em] text-[#d4c2a0]">CITIES GLOBAL</p></div>
 </div>
-<div class="grid grid-cols-3 gap-6 mt-12 max-w-3xl mx-auto border-y border-[#d4c2a0]/20 py-6">
-<div class="text-center"><p class="serif text-[20px] font-semibold">20,000+</p><p class="text-[11px] tracking-[0.15em] text-[#d4c2a0]">LISTINGS</p><p class="text-[10px] text-[#e8dcc6]/50">Verified Luxury Properties</p></div>
-<div class="text-center border-x border-[#d4c2a0]/10"><p class="serif text-[20px] font-semibold">1B+</p><p class="text-[11px] tracking-[0.15em] text-[#d4c2a0]">LIVE AUCTIONS</p><p class="text-[10px] text-[#e8dcc6]/50">Total Auction Volume</p></div>
-<div class="text-center"><p class="serif text-[20px] font-semibold">150+</p><p class="text-[11px] tracking-[0.15em] text-[#d4c2a0]">CITIES GLOBAL</p><p class="text-[10px] text-[#e8dcc6]/50">North America • Europe • Asia • ME</p></div>
-</div>
-<div class="flex items-center justify-center gap-4 mt-10"><div class="h-px w-24 bg-[#d4c2a0]/30"></div><p class="text-[11px] tracking-[0.3em] text-[#d4c2a0]">LIVE NOW — FEATURED AUCTIONS</p><div class="h-px w-24 bg-[#d4c2a0]/30"></div></div>
+<div class="flex items-center justify-center gap-4 mt-8"><div class="h-px w-24 bg-[#d4c2a0]/30"></div><p class="text-[11px] tracking-[0.3em] text-[#d4c2a0]">LIVE NOW — FEATURED AUCTIONS • CLICK TO TRANSFORM HOLOGRAM</p><div class="h-px w-24 bg-[#d4c2a0]/30"></div></div>
 </section>
-
-<section id="auctions" class="px-6 lg:px-12 py-10 bg-[#0a0a0a]">
+<section id="auctions" class="px-6 lg:px-12 py-10">
 <div id="featured" class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-7xl mx-auto"></div>
 <div id="feed" class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-7xl mx-auto mt-6"></div>
-<p id="emptyMsg" class="text-center py-16 text-[#d4c2a0]/50 hidden">No properties yet. Add first via Admin - <a href="admin.html" class="text-[#d4c2a0] underline">Go to Admin</a></p>
+<p id="emptyMsg" class="text-center py-16 text-[#d4c2a0]/50 hidden">No properties yet - <a href="admin.html" class="underline text-[#d4c2a0]">Add via Admin</a></p>
 </section>
-
-<section class="mt-8 border-t border-[#d4c2a0]/20 bg-[#111]">
-<div class="px-6 lg:px-12 py-6 flex justify-between items-center">
-<h3 class="serif text-[18px] text-[#d4c2a0]">Holographic Building Structure • Below The Fold</h3>
-<p class="text-[10px] tracking-widest text-[#d4c2a0]/60">DRAG 360° • SCROLL ZOOM • LIVE HOLOGRAM</p>
+<section class="mt-4 border-y border-[#d4c2a0]/20 bg-[#0f0f0f]">
+<div class="px-6 lg:px-12 py-5 flex flex-wrap justify-between items-center gap-2">
+<div><h3 class="serif text-[18px] text-[#d4c2a0]">Holographic Building Structure • Dynamic</h3><p class="text-[11px] text-[#d4c2a0]/60 mt-1">Transforms to match selected property • <span id="currentBuildingType" class="text-[#d4c2a0] font-bold">Duplex</span></p></div>
 </div>
-<div id="holoWrap" style="width:100%;height:520px;background:radial-gradient(ellipse at center,#1a2a2a,#0a0a0a);position:relative;overflow:hidden;border-top:1px solid #d4c2a020;border-bottom:1px solid #d4c2a020">
+<div id="holoWrap" style="width:100%;height:560px;background:radial-gradient(ellipse at center,#1a2a2a,#0a0a0a);position:relative;overflow:hidden">
   <model-viewer id="holoViewer" style="width:100%;height:100%;display:none" auto-rotate camera-controls ar></model-viewer>
   <canvas id="wireCanvas"></canvas>
-  <div style="position:absolute;bottom:20px;left:50%;transform:translateX(-50%);background:rgba(212,194,160,0.12);border:1px solid #d4c2a0;padding:8px 18px;font-size:11px;color:#d4c2a0;border-radius:24px;backdrop-filter:blur(8px)">◈ DRAG TO ROTATE 360° • SCROLL ZOOM • LIVE HOLOGRAM</div>
-  <div style="position:absolute;top:20px;right:20px;background:rgba(0,0,0,0.6);border:1px solid #d4c2a0;padding:6px 14px;font-size:10px;color:#d4c2a0;border-radius:20px">WIRE: <span id="holoInfo">Auto Wireframe - 5 Floors</span> • <span id="holoTitle">ONE ROOF Building</span></div>
+  <div style="position:absolute;bottom:20px;left:50%;transform:translateX(-50%);background:rgba(212,194,160,0.12);border:1px solid #d4c2a0;padding:8px 18px;font-size:11px;color:#d4c2a0;border-radius:24px">◈ DRAG TO ROTATE 360° • SCROLL ZOOM • DYNAMIC HOLOGRAM</div>
+  <div style="position:absolute;top:20px;right:20px;background:rgba(0,0,0,0.7);border:1px solid #d4c2a0;padding:8px 14px;font-size:10px;color:#d4c2a0;border-radius:20px">WIRE: <span id="holoInfo">Duplex - 5 Floors</span> • <span id="holoTitle">ONE ROOF Building</span></div>
 </div>
 </section>
-
-<footer class="border-t border-[#d4c2a0]/20 py-6 text-center">
-<p class="text-[10px] tracking-widest text-[#d4c2a0]/50">ONE ROOF by AWF • Founded 2024 • Trusted by collectors worldwide • Privacy • Terms • Contact</p>
-</footer>
-
 <script>
 const canvas = document.getElementById('wireCanvas');
 let scene, camera, renderer, group, rotY=0, auto=true, isDrag=false, prevX=0;
+const buildingTypes = {
+  duplex: {w:2.6, h:5.2, d:2.6, floors:5, name:'Duplex - 5 Floors'},
+  bungalow: {w:4.5, h:1.4, d:3.5, floors:1, name:'Bungalow - Wide Single Floor'},
+  highrise: {w:1.8, h:10, d:1.8, floors:10, name:'High-Rise - 10 Floors Penthouse'},
+  villa: {w:4.2, h:3.2, d:4.2, floors:2, name:'Luxury Villa - 2 Floors'},
+  chateau: {w:5, h:4, d:4.5, floors:3, name:'Chateau - Estate 3 Floors'},
+  penthouse: {w:3.5, h:2, d:6, floors:1, name:'Penthouse - Wide Terrace'}
+};
 function init() {
   scene = new THREE.Scene();
-  camera = new THREE.PerspectiveCamera(45, window.innerWidth/520, 0.1, 100);
-  camera.position.set(0, 5.5, 10);
-  camera.lookAt(0,0,0);
+  camera = new THREE.PerspectiveCamera(45, window.innerWidth/560, 0.1, 100);
+  camera.position.set(0, 6, 12); camera.lookAt(0,0,0);
   renderer = new THREE.WebGLRenderer({canvas, alpha:true, antialias:true});
-  renderer.setSize(window.innerWidth, 520);
-  renderer.setPixelRatio(window.devicePixelRatio);
-  renderer.setClearColor(0x000000, 0);
+  renderer.setSize(window.innerWidth, 560); renderer.setClearColor(0x000000, 0);
   group = new THREE.Group(); scene.add(group);
-  const buildingGeo = new THREE.BoxGeometry(2.6, 5.2, 2.6);
-  const edges = new THREE.EdgesGeometry(buildingGeo);
-  const lineMat = new THREE.LineBasicMaterial({color: 0xd4c2a0});
-  const wire = new THREE.LineSegments(edges, lineMat); group.add(wire);
-  for(let i=0;i<5;i++){
-    const floor = new THREE.Mesh(new THREE.BoxGeometry(2.9, 0.08, 2.9), new THREE.MeshBasicMaterial({color:0xd4c2a0, transparent:true, opacity:0.25}));
-    floor.position.y = -2.1 + i*1.15; group.add(floor);
-  }
-  const ring = new THREE.Mesh(new THREE.RingGeometry(2.6, 3.6, 40), new THREE.MeshBasicMaterial({color:0xd4c2a0, side:THREE.DoubleSide, transparent:true, opacity:0.35}));
-  ring.rotation.x = Math.PI/2; ring.position.y = -2.9; group.add(ring);
+  buildStructure('duplex');
   canvas.addEventListener('pointerdown', e=>{isDrag=true; auto=false; prevX=e.clientX;});
   canvas.addEventListener('pointerup', ()=>{isDrag=false; setTimeout(()=>auto=true,2000);});
   canvas.addEventListener('pointermove', e=>{if(!isDrag)return; rotY+=(e.clientX-prevX)*0.01; prevX=e.clientX;});
-  window.addEventListener('resize', ()=>{camera.aspect=window.innerWidth/520; camera.updateProjectionMatrix(); renderer.setSize(window.innerWidth, 520);});
+  window.addEventListener('resize', ()=>{camera.aspect=window.innerWidth/560; camera.updateProjectionMatrix(); renderer.setSize(window.innerWidth, 560);});
   animate();
+}
+function clearGroup(){ while(group.children.length>0) group.remove(group.children[0]); }
+function buildStructure(type){
+  const cfg = buildingTypes[type] || buildingTypes.duplex;
+  clearGroup();
+  const geo = new THREE.BoxGeometry(cfg.w, cfg.h, cfg.d);
+  const edges = new THREE.EdgesGeometry(geo);
+  const wire = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({color: 0xd4c2a0})); group.add(wire);
+  for(let i=0;i<cfg.floors;i++){ if(cfg.floors===1) continue; const y = -cfg.h/2 + (cfg.h/cfg.floors)*i + (cfg.h/cfg.floors)/2; const floor = new THREE.Mesh(new THREE.BoxGeometry(cfg.w*1.1, 0.06, cfg.d*1.1), new THREE.MeshBasicMaterial({color:0xd4c2a0, transparent:true, opacity:0.2})); floor.position.y = y; group.add(floor); }
+  if(type==='bungalow'){ const roofGeo = new THREE.ConeGeometry(cfg.w*0.8, 0.8, 4); const roof = new THREE.LineSegments(new THREE.EdgesGeometry(roofGeo), new THREE.LineBasicMaterial({color:0xd4c2a0})); roof.position.y = cfg.h/2 + 0.4; roof.rotation.y = Math.PI/4; group.add(roof); }
+  const ringSize = Math.max(cfg.w,cfg.d);
+  const ring = new THREE.Mesh(new THREE.RingGeometry(ringSize, ringSize+1, 32), new THREE.MeshBasicMaterial({color:0xd4c2a0, side:THREE.DoubleSide, transparent:true, opacity:0.35}));
+  ring.rotation.x = Math.PI/2; ring.position.y = -cfg.h/2 - 0.8; group.add(ring);
+  document.getElementById('holoInfo').innerText = cfg.name;
+  document.getElementById('currentBuildingType').innerText = cfg.name;
 }
 function animate(){requestAnimationFrame(animate); if(auto) rotY+=0.01; if(group) group.rotation.y=rotY; renderer.render(scene, camera);} 
 init();
+function detectTypeFromProperty(prop){
+  const t = ((prop.title||'') + ' ' + (prop.buildingType||'') + ' ' + (prop.desc||'')).toLowerCase();
+  if(t.includes('bungalow')) return 'bungalow';
+  if(t.includes('high') || t.includes('penthouse') || t.includes('tower')) return 'highrise';
+  if(t.includes('villa')) return 'villa';
+  if(t.includes('chateau') || t.includes('estate') || t.includes('mansion')) return 'chateau';
+  if(prop.buildingType && buildingTypes[prop.buildingType]) return prop.buildingType;
+  return 'duplex';
+}
 window.openHolographic = function(prop){
   const viewer=document.getElementById('holoViewer');
-  if(prop.model3d && prop.holoType==='glb' && prop.model3d!=''){
-    viewer.style.display='block'; canvas.style.display='none'; viewer.src=prop.model3d; document.getElementById('holoInfo').innerText='GLB Model';
-  }else{
-    viewer.style.display='none'; canvas.style.display='block'; document.getElementById('holoInfo').innerText='Auto Wireframe - 5 Floors';
-  }
+  if(prop.model3d && prop.holoType==='glb' && prop.model3d!=''){ viewer.style.display='block'; canvas.style.display='none'; viewer.src=prop.model3d; }
+  else{ viewer.style.display='none'; canvas.style.display='block'; buildStructure(detectTypeFromProperty(prop)); }
   document.getElementById('holoTitle').innerText=prop.title||'ONE ROOF Building';
   document.getElementById('holoWrap').scrollIntoView({behavior:'smooth'});
 }
 </script>
-
 <script type="module">
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
 import { getFirestore, collection, query, orderBy, onSnapshot } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
-const firebaseConfig = {
-  apiKey: "AIzaSyCaT7A33x93pBgSUhBZOPbKX6egSgLqDLI",
-  authDomain: "awf-oneroof.firebaseapp.com",
-  projectId: "awf-oneroof",
-  storageBucket: "awf-oneroof.firebasestorage.app",
-  messagingSenderId: "752950974508",
-  appId: "1:752950974508:web:52b693571800a0835a9989",
-  measurementId: "G-T1L6D42RZX"
-};
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-const colRef = collection(db, "properties");
-const feed=document.getElementById('feed');
-const featured=document.getElementById('featured');
+const firebaseConfig = { apiKey: "AIzaSyCaT7A33x93pBgSUhBZOPbKX6egSgLqDLI", authDomain: "awf-oneroof.firebaseapp.com", projectId: "awf-oneroof", storageBucket: "awf-oneroof.firebasestorage.app", messagingSenderId: "752950974508", appId: "1:752950974508:web:52b693571800a0835a9989", measurementId: "G-T1L6D42RZX" };
+const app = initializeApp(firebaseConfig); const db = getFirestore(app); const colRef = collection(db, "properties");
+const feed=document.getElementById('feed'); const featured=document.getElementById('featured');
 const q=query(colRef, orderBy('createdAt','desc'));
 onSnapshot(q, snap=>{
   feed.innerHTML=''; featured.innerHTML='';
   if(snap.empty){document.getElementById('emptyMsg').classList.remove('hidden'); return;} else document.getElementById('emptyMsg').classList.add('hidden');
-  let idx=0;
-  snap.forEach(d=>{
-    const p=d.data(); const imgs=(p.images||[]); const firstImg=imgs[0]||'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9';
+  let idx=0; snap.forEach(d=>{
+    const p=d.data(); const firstImg=(p.images||[])[0]||'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9';
+    const badge = (p.buildingType||'duplex').toUpperCase();
     const card = document.createElement('div');
     card.className='card-hover bg-[#141414] border border-[#d4c2a0]/20 overflow-hidden group cursor-pointer';
-    const hrs = String(Math.floor(Math.random()*12)).padStart(2,'0');
-    const mins = String(Math.floor(Math.random()*60)).padStart(2,'0');
-    const secs = String(Math.floor(Math.random()*60)).padStart(2,'0');
-    card.innerHTML=`
-      <div class="relative h-[220px] overflow-hidden">
-        <img src="${firstImg}" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
-        <div class="absolute top-3 left-3 bg-black/80 px-2 py-1 text-[10px] tracking-widest text-white border border-white/20">LIVE • ${hrs}:${mins}:${secs}</div>
-        <div class="absolute top-3 right-3 bg-[#d4c2a0]/90 text-black px-2 py-1 text-[10px] font-bold">₦${Number(p.price||0).toLocaleString()}</div>
-      </div>
-      <div class="p-4 text-center">
-        <h3 class="serif text-[15px] text-[#e8dcc6] leading-tight">${p.title||'Untitled Estate'}</h3>
-        <p class="text-[11px] text-[#d4c2a0]/60 mt-2">Current bid • ₦${Number(p.price||0).toLocaleString()} • ${p.beds||5} bids • <button onclick='openHolographic({title:"${(p.title||'').replace(/"/g,'')}",model3d:"${(p.model3d||'').replace(/"/g,'')}",holoType:"${p.holoType||'wireframe}"})' class="underline text-[#d4c2a0]">HOLOGRAM</button></p>
-      </div>
-    `;
-    if(idx<3) featured.appendChild(card); else feed.appendChild(card);
-    idx++;
+    card.innerHTML=`<div class="relative h-[230px] overflow-hidden"><img src="${firstImg}" class="w-full h-full object-cover"><div class="absolute top-3 left-3 bg-black/80 px-2 py-1 text-[10px] text-white border border-white/20">LIVE</div><div class="absolute top-3 right-3 bg-[#d4c2a0]/90 text-black px-2 py-1 text-[10px] font-bold">₦${Number(p.price||0).toLocaleString()}</div><div class="absolute bottom-3 left-3 bg-[#d4c2a0] text-black px-2 py-1 text-[9px] font-black">${badge}</div></div><div class="p-4 text-center"><h3 class="serif text-[15px] text-[#e8dcc6]">${p.title||'Untitled'}</h3><p class="text-[11px] text-[#d4c2a0]/60 mt-2"><button onclick='openHolographic({title:"${(p.title||'').replace(/"/g,'')}",model3d:"${(p.model3d||'').replace(/"/g,'')}",holoType:"${p.holoType||'wireframe}",buildingType:"${p.buildingType||'duplex}",beds:${p.beds||0},price:${p.price||0},desc:"${(p.desc||'').replace(/"/g,'')}"})' class="underline text-[#d4c2a0] font-bold">VIEW HOLOGRAM → TRANSFORMS</button></p></div>`;
+    if(idx<3) featured.appendChild(card); else feed.appendChild(card); idx++;
   });
 });
 </script>

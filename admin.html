@@ -1,68 +1,86 @@
 <!DOCTYPE html><html><head>
-<title>AWF Admin V2 - Images + Video</title>
+<title>AWF V4 Admin Holographic</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<style>
-body{font-family:Inter,sans-serif;background:#0a0a0a;color:white;padding:20px}
-.card{background:#1a1a1a;padding:20px;border-radius:12px;max-width:700px;margin:auto}
-input,textarea,select{width:100%;padding:12px;margin:6px 0;border-radius:8px;border:1px solid #333;background:#222;color:white}
-button{background:#FFD700;color:black;padding:14px;width:100%;border:none;border-radius:8px;font-weight:bold;cursor:pointer;margin-top:10px}
-.item{background:#222;padding:12px;border-radius:8px;margin:10px 0}
-.badge{padding:4px 10px;border-radius:20px;font-size:11px} .mall{background:green} .auction{background:red}
-.small{font-size:11px;color:#888}
-</style>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js"></script>
+<script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+<style>body{font-family:Inter;background:#050505;color:white;padding:10px}input,textarea,select{width:100%;padding:12px;background:#1a1a1a;color:white;border:1px solid #333;border-radius:10px;margin:6px 0}</style>
 </head><body>
-<div class="card" id="loginBox">
-<h2>AWF Admin V2</h2>
-<input type="password" id="pass" placeholder="Password">
-<button onclick="login()">Login</button>
-<p class="small">Default: AWF2026</p>
+<div id="holoWrap" style="width:100%;height:420px;background:radial-gradient(ellipse at center,#0a2a2a,#000);border:1px solid #00ffff60;display:none;position:relative;border-radius:16px;overflow:hidden;margin-bottom:12px">
+  <model-viewer id="holoViewer" style="width:100%;height:100%;display:none" auto-rotate camera-controls></model-viewer>
+  <canvas id="wireCanvas" style="width:100%;height:100%;display:block"></canvas>
+  <div style="position:absolute;bottom:10px;left:10px;background:#00ffff20;border:1px solid #0ff;padding:6px 12px;font-size:10px;color:#0ff;border-radius:20px">◈ DRAG TO ROTATE 360° • LIVE PREVIEW</div>
 </div>
-<div class="card" id="adminBox" style="display:none">
-<h2>Add Property - Images + Video</h2>
-<input id="title" placeholder="Title e.g. 5 Bedroom Duplex Guzape">
-<div style="display:flex;gap:10px"><input id="price" type="number" placeholder="Price NGN e.g. 650000000"><input id="beds" type="number" placeholder="Beds"></div>
-<input id="city" placeholder="City e.g. Abuja Guzape">
-<p class="small">IMAGES (Best: Upload to imgbb.com and paste links - 1 per line, up to 5)</p>
-<textarea id="images" rows="5" placeholder="https://i.ibb.co/xxxx/image1.jpg
-https://i.ibb.co/xxxx/image2.jpg
-https://i.ibb.co/xxxx/image3.jpg
-https://i.ibb.co/xxxx/image4.jpg"></textarea>
-<p class="small">VIDEO (YouTube link OR direct MP4 link - Optional but HIGHLY recommended for billionaires)</p>
-<input id="video" placeholder="YouTube: https://youtube.com/watch?v=... OR https://...mp4">
-<textarea id="desc" placeholder="Description + Features: e.g. Swimming pool, BQ, C of O"></textarea>
-<select id="status"><option>Available</option><option>Sold</option><option>Under Offer</option></select>
-<p id="autoRule" style="color:#FFD700;font-weight:bold"></p>
-<button onclick="addProperty()">ADD PROPERTY WITH GALLERY</button>
-
-<h3 style="margin-top:30px">Listings (<span id="count">0</span>) - Tap to preview gallery</h3>
-<div id="list"></div>
-<button onclick="exportJSON()" style="background:white">EXPORT JSON</button>
-<button onclick="if(confirm('Clear all?')){localStorage.removeItem('awf_props');location.reload()}" style="background:#333;color:white">CLEAR ALL</button>
+<div style="max-width:800px;margin:auto;background:#111;padding:20px;border-radius:16px;border:1px solid #00ffff33">
+<h2 style="color:#0ff">AWF V4 Admin - UPGRADED</h2>
+<input id="pass" type="password" placeholder="AWF2026">
+<button onclick="if(document.getElementById('pass').value==='AWF2026'){document.getElementById('main').style.display='block'}else alert('Wrong')" style="background:#FFD700;color:black;font-weight:900;padding:12px;border:none;border-radius:8px;width:100%">LOGIN</button>
+<div id="main" style="display:none;margin-top:20px">
+<input id="title" placeholder="Title e.g. Guzape Luxury 5BR">
+<div style="display:flex;gap:8px"><input id="price" type="number" placeholder="Price NGN"><input id="beds" type="number" placeholder="Beds"></div>
+<input id="city" placeholder="District e.g. Guzape, Abuja">
+<textarea id="imgs" rows="7" placeholder="7 IMAGE LINKS - 1 per line"></textarea>
+<input id="video" placeholder="YouTube Tour Link">
+<input id="model" placeholder="3D GLB Model Link (Optional)">
+<select id="holo"><option value="wireframe">Auto Holographic Wireframe (No GLB needed)</option><option value="glb">Use My GLB Model Link</option></select>
+<textarea id="desc" placeholder="Description"></textarea>
+<button onclick="addLive()" style="background:linear-gradient(90deg,#FFD700,#0ff);color:black;font-weight:900;padding:16px;border:none;border-radius:12px;width:100%">ADD LIVE - HOLOGRAPHIC + GLOBAL V4</button>
+<div id="list" style="margin-top:20px"></div>
+</div>
 </div>
 <script>
-let props=JSON.parse(localStorage.getItem('awf_props')||'[]');
-function login(){if(document.getElementById('pass').value==='AWF2026'){document.getElementById('loginBox').style.display='none';document.getElementById('adminBox').style.display='block';render();}else alert('Wrong');}
-document.getElementById('price').addEventListener('input',()=>{let p=Number(document.getElementById('price').value);let r=document.getElementById('autoRule');if(p>=500000000){r.textContent='=> AUTO: AUCTION (500M+ - with Video Tour)';r.style.color='#ff4444';}else if(p>0){r.textContent='=> AUTO: MALL (Free Enquiry + Gallery)';r.style.color='#44ff44';}});
-function addProperty(){
- let imgArr=document.getElementById('images').value.split('\n').map(s=>s.trim()).filter(s=>s);
- if(imgArr.length==0)return alert('Add at least 1 image link');
- let p={id:Date.now(),title:document.getElementById('title').value,price:Number(document.getElementById('price').value),city:document.getElementById('city').value,beds:document.getElementById('beds').value,images:imgArr,video:document.getElementById('video').value,desc:document.getElementById('desc').value,status:document.getElementById('status').value,type:Number(document.getElementById('price').value)>=500000000?'AUCTION':'MALL',date:new Date().toLocaleDateString()};
- if(!p.title||!p.price)return alert('Title + Price required');
- props.unshift(p);localStorage.setItem('awf_props',JSON.stringify(props));render();
- document.getElementById('title').value='';document.getElementById('price').value='';document.getElementById('images').value='';document.getElementById('video').value='';
- alert('Added '+p.images.length+' images '+(p.video?' + Video ✓':''));
+function openHolographic(property){
+  document.getElementById('holoWrap').style.display='block';
+  let viewer=document.getElementById('holoViewer');
+  let canvas=document.getElementById('wireCanvas');
+  if(property.model3d && property.holoType==='glb' && property.model3d!=''){
+    viewer.style.display='block'; canvas.style.display='none'; viewer.src=property.model3d;
+  }else{
+    viewer.style.display='none'; canvas.style.display='block'; if(!window.wireInit) initWire();
+  }
 }
-function render(){
- document.getElementById('count').textContent=props.length;
- document.getElementById('list').innerHTML=props.map(x=>`
- <div class="item">
-  <div style="display:flex;gap:8px;overflow-x:auto">${x.images.slice(0,4).map(img=>`<img src="${img}" style="width:60px;height:60px;object-fit:cover;border-radius:6px">`).join('')}</div>
-  <div style="margin-top:8px"><b>${x.title}</b><br><small>${x.city} - ₦${x.price.toLocaleString()} - ${x.images.length} imgs ${x.video?' + 🎥 Video':''}</small> <span class="badge ${x.type==='MALL'?'mall':'auction'}">${x.type}</span></div>
-  <div style="display:flex;gap:6px;margin-top:8px"><button onclick="del(${x.id})" style="background:red;padding:6px;font-size:11px">DELETE</button><button onclick="preview(${x.id})" style="background:#333;color:white;padding:6px;font-size:11px">PREVIEW</button></div>
- </div>`).join('');
+let rotY=0, auto=true, isDrag=false, prevX=0, group; window.wireInit=false;
+function initWire(){
+ window.wireInit=true;
+ const canvas=document.getElementById('wireCanvas');
+ const scene=new THREE.Scene();
+ const camera=new THREE.PerspectiveCamera(45, canvas.clientWidth/canvas.clientHeight, 0.1, 100);
+ camera.position.set(0,6,12);
+ const renderer=new THREE.WebGLRenderer({canvas, alpha:true, antialias:true});
+ renderer.setSize(canvas.clientWidth, canvas.clientHeight);
+ group=new THREE.Group(); scene.add(group);
+ const geo=new THREE.BoxGeometry(3,6,3); const edges=new THREE.EdgesGeometry(geo); const mat=new THREE.LineBasicMaterial({color:0x00ffff}); const wire=new THREE.LineSegments(edges,mat); group.add(wire);
+ for(let i=0;i<5;i++){const f=new THREE.Mesh(new THREE.BoxGeometry(3.3,0.05,3.3), new THREE.MeshBasicMaterial({color:0x00ffff, transparent:true, opacity:0.2})); f.position.y=-2.5+i*1.5; group.add(f);}
+ canvas.addEventListener('pointerdown', e=>{isDrag=true; auto=false; prevX=e.clientX;});
+ canvas.addEventListener('pointerup', ()=>{isDrag=false; setTimeout(()=>auto=true,2000);});
+ canvas.addEventListener('pointermove', e=>{if(!isDrag)return; rotY+=(e.clientX-prevX)*0.01; prevX=e.clientX;});
+ function animate(){requestAnimationFrame(animate); if(auto) rotY+=0.01; if(group) group.rotation.y=rotY; renderer.render(scene,camera);} animate();
 }
-function del(id){props=props.filter(x=>x.id!==id);localStorage.setItem('awf_props',JSON.stringify(props));render();}
-function preview(id){let p=props.find(x=>x.id===id);alert(p.title+'\nImages:'+p.images.length+'\nVideo:'+(p.video||'none')+'\n\nOn main site, buyers will see gallery slider + video button');}
-function exportJSON(){let blob=new Blob([JSON.stringify(props,null,2)],{type:'application/json'});let a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='awf-listings.json';a.click();}
+const firebaseConfig = {
+  apiKey: "AIzaSyCaT7A33x93pBgSUhBZOPbKX6egSgLqDLI",
+  authDomain: "awf-oneroof.firebaseapp.com",
+  projectId: "awf-oneroof",
+  storageBucket: "awf-oneroof.firebasestorage.app",
+  messagingSenderId: "752950974508",
+  appId: "1:752950974508:web:52b693571800a0835a9989",
+  measurementId: "G-T1L6D42RZX"
+};
+firebase.initializeApp(firebaseConfig);
+const db=firebase.firestore();
+async function addLive(){
+ let imgs=document.getElementById('imgs').value.split('\n').map(s=>s.trim()).filter(s=>s);
+ if(imgs.length==0) return alert('Add images');
+ let d={title:document.getElementById('title').value,price:Number(document.getElementById('price').value),beds:Number(document.getElementById('beds').value),city:document.getElementById('city').value,location:document.getElementById('city').value,images:imgs.slice(0,7),video:document.getElementById('video').value,model3d:document.getElementById('model').value,holoType:document.getElementById('holo').value,desc:document.getElementById('desc').value,type:Number(document.getElementById('price').value)>=500000000?'AUCTION':'MALL',createdAt:firebase.firestore.FieldValue.serverTimestamp()};
+ await db.collection('properties').add(d); alert('LIVE V4!'); openHolographic(d); load();
+}
+async function load(){
+ let s=await db.collection('properties').orderBy('createdAt','desc').limit(50).get();
+ document.getElementById('list').innerHTML=s.docs.map(doc=>{
+   let d=doc.data();
+   return `<div style="background:#222;padding:10px;margin:6px 0;border-radius:8px;display:flex;justify-content:space-between"><div><b>${d.title||''}</b> - ₦${(d.price||0).toLocaleString()}<br><button onclick='openHolographic({title:"${(d.title||'').replace(/"/g,'')}",model3d:"${(d.model3d||'').replace(/"/g,'')}",holoType:"${d.holoType||'wireframe}"})' style="background:#0ff;color:black;padding:4px 8px;border:none;border-radius:4px;margin-top:4px">View Hologram</button></div><button onclick="db.collection('properties').doc('${doc.id}').delete().then(()=>load())" style="background:red;color:white;padding:6px;border:none;border-radius:6px">DEL</button></div>`
+ }).join('');
+}
+load();
 </script>
 </body></html>

@@ -1,84 +1,114 @@
 <!DOCTYPE html><html><head>
-<title>AWF V4 Admin Holographic</title>
+<title>AWF V6 Admin - Dynamic Holographic</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
 <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js"></script>
-<script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
-<style>body{font-family:Inter;background:#050505;color:white;padding:10px}input,textarea,select{width:100%;padding:12px;background:#1a1a1a;color:white;border:1px solid #333;border-radius:10px;margin:6px 0}</style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.160.0/three.min.js"></script>
+<style>
+body{font-family:Inter;background:#0a0a0a;color:#e8dcc6;padding:10px;margin:0}
+input,textarea,select{width:100%;padding:12px;background:#1a1a1a;color:#e8dcc6;border:1px solid #333;border-radius:10px;margin:6px 0;font-size:14px}
+#wireCanvas{width:100%!important;height:420px!important;display:block}
+</style>
 </head><body>
-<div id="holoWrap" style="width:100%;height:420px;background:radial-gradient(ellipse at center,#0a2a2a,#000);border:1px solid #00ffff60;display:none;position:relative;border-radius:16px;overflow:hidden;margin-bottom:12px">
+<div id="holoWrap" style="width:100%;height:440px;background:radial-gradient(ellipse at center,#1a2a2a,#0a0a0a);border:1px solid #d4c2a060;display:none;position:relative;border-radius:16px;overflow:hidden;margin-bottom:16px">
   <model-viewer id="holoViewer" style="width:100%;height:100%;display:none" auto-rotate camera-controls></model-viewer>
-  <canvas id="wireCanvas" style="width:100%;height:100%;display:block"></canvas>
-  <div style="position:absolute;bottom:10px;left:10px;background:#00ffff20;border:1px solid #0ff;padding:6px 12px;font-size:10px;color:#0ff;border-radius:20px">◈ DRAG TO ROTATE 360° • LIVE PREVIEW</div>
+  <canvas id="wireCanvas"></canvas>
+  <div style="position:absolute;bottom:12px;left:50%;transform:translateX(-50%);background:rgba(212,194,160,0.12);border:1px solid #d4c2a0;padding:6px 14px;font-size:10px;color:#d4c2a0;border-radius:20px">◈ DRAG TO ROTATE 360° • LIVE PREVIEW • DYNAMIC</div>
+  <div style="position:absolute;top:12px;right:12px;background:rgba(0,0,0,0.7);border:1px solid #d4c2a0;padding:6px 12px;font-size:10px;color:#d4c2a0;border-radius:20px">WIRE: <span id="holoInfo">Duplex</span></div>
 </div>
-<div style="max-width:800px;margin:auto;background:#111;padding:20px;border-radius:16px;border:1px solid #00ffff33">
-<h2 style="color:#0ff">AWF V4 Admin - UPGRADED</h2>
-<input id="pass" type="password" placeholder="AWF2026">
-<button onclick="if(document.getElementById('pass').value==='AWF2026'){document.getElementById('main').style.display='block'}else alert('Wrong')" style="background:#FFD700;color:black;font-weight:900;padding:12px;border:none;border-radius:8px;width:100%">LOGIN</button>
+<div style="max-width:800px;margin:auto;background:#111;padding:20px;border-radius:16px;border:1px solid #d4c2a033">
+<h2 style="color:#d4c2a0;font-size:22px;margin:0;letter-spacing:0.1em">ONE ROOF by AWF</h2>
+<h3 style="color:#d4c2a0;font-size:14px;margin:4px 0 12px 0">V6 Admin - Dynamic Holographic • Password AWF2026</h3>
+<input id="pass" type="password" placeholder="Enter AWF2026">
+<button onclick="if(document.getElementById('pass').value==='AWF2026'){document.getElementById('main').style.display='block';document.getElementById('msg').innerText='✅ Admin Unlocked V6 Dynamic'}else alert('Wrong password')" style="background:#d4c2a0;color:black;font-weight:900;padding:12px;border:none;border-radius:10px;width:100%">LOGIN V6</button>
+<p id="msg" style="font-size:11px;color:#d4c2a0;text-align:center;margin-top:8px"></p>
 <div id="main" style="display:none;margin-top:20px">
-<input id="title" placeholder="Title e.g. Guzape Luxury 5BR">
+<input id="title" placeholder="Title e.g. Guzape Luxury 5BR Duplex or Modern Bungalow">
 <div style="display:flex;gap:8px"><input id="price" type="number" placeholder="Price NGN"><input id="beds" type="number" placeholder="Beds"></div>
 <input id="city" placeholder="District e.g. Guzape, Abuja">
-<textarea id="imgs" rows="7" placeholder="7 IMAGE LINKS - 1 per line"></textarea>
-<input id="video" placeholder="YouTube Tour Link">
+<label style="font-size:11px;color:#d4c2a0;margin-top:8px;display:block">🏗️ BUILDING STRUCTURE TYPE (Controls Hologram Shape)</label>
+<select id="buildingType" onchange="previewBuilding(this.value)" style="border:1px solid #d4c2a0;color:#d4c2a0;background:#1a1a12">
+<option value="duplex">Duplex - 5 Floors Tower (Default)</option>
+<option value="bungalow">Bungalow - Single Floor Wide + Roof</option>
+<option value="highrise">High-Rise - 10 Floors Penthouse Skyscraper</option>
+<option value="villa">Villa - 2 Floors Luxury Wide</option>
+<option value="chateau">Chateau / Mansion - Estate 3 Floors Massive</option>
+<option value="penthouse">Penthouse - Wide Terrace Luxury</option>
+</select>
+<textarea id="imgs" rows="7" placeholder="PASTE 7 IMAGE LINKS - 1 per line from imgbb.com or unsplash"></textarea>
+<input id="video" placeholder="YouTube Tour Link (Optional)">
 <input id="model" placeholder="3D GLB Model Link (Optional)">
-<select id="holo"><option value="wireframe">Auto Holographic Wireframe (No GLB needed)</option><option value="glb">Use My GLB Model Link</option></select>
+<select id="holo" style="border:1px solid #00ffff50;color:#0ff">
+<option value="wireframe">Auto Holographic Wireframe (Uses Building Type Above)</option>
+<option value="glb">Use My GLB Model Link (Custom 3D)</option>
+</select>
 <textarea id="desc" placeholder="Description"></textarea>
-<button onclick="addLive()" style="background:linear-gradient(90deg,#FFD700,#0ff);color:black;font-weight:900;padding:16px;border:none;border-radius:12px;width:100%">ADD LIVE - HOLOGRAPHIC + GLOBAL V4</button>
+<button onclick="addLive()" style="background:linear-gradient(90deg,#d4c2a0,#00ffff);color:black;font-weight:900;padding:16px;border:none;border-radius:12px;width:100%;font-size:16px;margin-top:8px">ADD LIVE - DYNAMIC HOLOGRAPHIC V6</button>
 <div id="list" style="margin-top:20px"></div>
 </div>
 </div>
 <script>
-function openHolographic(property){
-  document.getElementById('holoWrap').style.display='block';
-  let viewer=document.getElementById('holoViewer');
-  let canvas=document.getElementById('wireCanvas');
-  if(property.model3d && property.holoType==='glb' && property.model3d!=''){
-    viewer.style.display='block'; canvas.style.display='none'; viewer.src=property.model3d;
-  }else{
-    viewer.style.display='none'; canvas.style.display='block'; if(!window.wireInit) initWire();
-  }
-}
-let rotY=0, auto=true, isDrag=false, prevX=0, group; window.wireInit=false;
-function initWire(){
- window.wireInit=true;
- const canvas=document.getElementById('wireCanvas');
- const scene=new THREE.Scene();
- const camera=new THREE.PerspectiveCamera(45, canvas.clientWidth/canvas.clientHeight, 0.1, 100);
- camera.position.set(0,6,12);
- const renderer=new THREE.WebGLRenderer({canvas, alpha:true, antialias:true});
- renderer.setSize(canvas.clientWidth, canvas.clientHeight);
- group=new THREE.Group(); scene.add(group);
- const geo=new THREE.BoxGeometry(3,6,3); const edges=new THREE.EdgesGeometry(geo); const mat=new THREE.LineBasicMaterial({color:0x00ffff}); const wire=new THREE.LineSegments(edges,mat); group.add(wire);
- for(let i=0;i<5;i++){const f=new THREE.Mesh(new THREE.BoxGeometry(3.3,0.05,3.3), new THREE.MeshBasicMaterial({color:0x00ffff, transparent:true, opacity:0.2})); f.position.y=-2.5+i*1.5; group.add(f);}
- canvas.addEventListener('pointerdown', e=>{isDrag=true; auto=false; prevX=e.clientX;});
- canvas.addEventListener('pointerup', ()=>{isDrag=false; setTimeout(()=>auto=true,2000);});
- canvas.addEventListener('pointermove', e=>{if(!isDrag)return; rotY+=(e.clientX-prevX)*0.01; prevX=e.clientX;});
- function animate(){requestAnimationFrame(animate); if(auto) rotY+=0.01; if(group) group.rotation.y=rotY; renderer.render(scene,camera);} animate();
-}
-const firebaseConfig = {
-  apiKey: "AIzaSyCaT7A33x93pBgSUhBZOPbKX6egSgLqDLI",
-  authDomain: "awf-oneroof.firebaseapp.com",
-  projectId: "awf-oneroof",
-  storageBucket: "awf-oneroof.firebasestorage.app",
-  messagingSenderId: "752950974508",
-  appId: "1:752950974508:web:52b693571800a0835a9989",
-  measurementId: "G-T1L6D42RZX"
+let scene, camera, renderer, group, rotY=0, auto=true, isDrag=false, prevX=0;
+const canvas = document.getElementById('wireCanvas');
+const buildingTypes = {
+  duplex: {w:2.6, h:5.2, d:2.6, floors:5, name:'Duplex - 5 Floors'},
+  bungalow: {w:4.5, h:1.4, d:3.5, floors:1, name:'Bungalow - Wide + Roof'},
+  highrise: {w:1.8, h:10, d:1.8, floors:10, name:'High-Rise - 10 Floors'},
+  villa: {w:4.2, h:3.2, d:4.2, floors:2, name:'Villa - 2 Floors Luxury'},
+  chateau: {w:5, h:4, d:4.5, floors:3, name:'Chateau - Estate 3 Floors'},
+  penthouse: {w:3.5, h:2, d:6, floors:1, name:'Penthouse - Terrace'}
 };
-firebase.initializeApp(firebaseConfig);
-const db=firebase.firestore();
+function init(){
+  scene=new THREE.Scene();
+  camera=new THREE.PerspectiveCamera(45, canvas.clientWidth/420, 0.1, 100);
+  camera.position.set(0,6,12); camera.lookAt(0,0,0);
+  renderer=new THREE.WebGLRenderer({canvas, alpha:true, antialias:true});
+  renderer.setSize(canvas.clientWidth, 420); renderer.setClearColor(0x000000,0);
+  group=new THREE.Group(); scene.add(group);
+  buildStructure('duplex');
+  canvas.addEventListener('pointerdown', e=>{isDrag=true; auto=false; prevX=e.clientX;});
+  canvas.addEventListener('pointerup', ()=>{isDrag=false; setTimeout(()=>auto=true,2000);});
+  canvas.addEventListener('pointermove', e=>{if(!isDrag)return; rotY+=(e.clientX-prevX)*0.01; prevX=e.clientX;});
+  animate();
+}
+function clearGroup(){while(group.children.length>0) group.remove(group.children[0]);}
+function buildStructure(type){
+  const cfg=buildingTypes[type]||buildingTypes.duplex;
+  clearGroup();
+  const geo=new THREE.BoxGeometry(cfg.w,cfg.h,cfg.d);
+  const edges=new THREE.EdgesGeometry(geo);
+  const wire=new THREE.LineSegments(edges, new THREE.LineBasicMaterial({color:0xd4c2a0}));
+  group.add(wire);
+  for(let i=0;i<cfg.floors;i++){ if(cfg.floors===1) continue; const y=-cfg.h/2 + (cfg.h/cfg.floors)*i + (cfg.h/cfg.floors)/2; const f=new THREE.Mesh(new THREE.BoxGeometry(cfg.w*1.1,0.06,cfg.d*1.1), new THREE.MeshBasicMaterial({color:0xd4c2a0,transparent:true,opacity:0.2})); f.position.y=y; group.add(f); }
+  if(type==='bungalow'){ const roofGeo=new THREE.ConeGeometry(cfg.w*0.8,0.8,4); const roof=new THREE.LineSegments(new THREE.EdgesGeometry(roofGeo), new THREE.LineBasicMaterial({color:0xd4c2a0})); roof.position.y=cfg.h/2+0.4; roof.rotation.y=Math.PI/4; group.add(roof); }
+  const ringSize=Math.max(cfg.w,cfg.d);
+  const ring=new THREE.Mesh(new THREE.RingGeometry(ringSize,ringSize+1,32), new THREE.MeshBasicMaterial({color:0xd4c2a0,side:THREE.DoubleSide,transparent:true,opacity:0.35}));
+  ring.rotation.x=Math.PI/2; ring.position.y=-cfg.h/2-0.8; group.add(ring);
+  document.getElementById('holoInfo').innerText=cfg.name;
+}
+function animate(){requestAnimationFrame(animate); if(auto) rotY+=0.01; if(group) group.rotation.y=rotY; if(renderer) renderer.render(scene,camera);}
+init();
+window.previewBuilding=function(type){ document.getElementById('holoWrap').style.display='block'; buildStructure(type); if(renderer) renderer.render(scene,camera); document.getElementById('holoWrap').scrollIntoView({behavior:'smooth'}); }
+function openHolographic(prop){
+  document.getElementById('holoWrap').style.display='block';
+  const viewer=document.getElementById('holoViewer');
+  if(prop.model3d && prop.holoType==='glb' && prop.model3d!=''){ viewer.style.display='block'; canvas.style.display='none'; viewer.src=prop.model3d; }
+  else{ viewer.style.display='none'; canvas.style.display='block'; buildStructure(prop.buildingType||'duplex'); }
+}
+const firebaseConfig = { apiKey: "AIzaSyCaT7A33x93pBgSUhBZOPbKX6egSgLqDLI", authDomain: "awf-oneroof.firebaseapp.com", projectId: "awf-oneroof", storageBucket: "awf-oneroof.firebasestorage.app", messagingSenderId: "752950974508", appId: "1:752950974508:web:52b693571800a0835a9989", measurementId: "G-T1L6D42RZX" };
+firebase.initializeApp(firebaseConfig); const db=firebase.firestore();
 async function addLive(){
  let imgs=document.getElementById('imgs').value.split('\n').map(s=>s.trim()).filter(s=>s);
- if(imgs.length==0) return alert('Add images');
- let d={title:document.getElementById('title').value,price:Number(document.getElementById('price').value),beds:Number(document.getElementById('beds').value),city:document.getElementById('city').value,location:document.getElementById('city').value,images:imgs.slice(0,7),video:document.getElementById('video').value,model3d:document.getElementById('model').value,holoType:document.getElementById('holo').value,desc:document.getElementById('desc').value,type:Number(document.getElementById('price').value)>=500000000?'AUCTION':'MALL',createdAt:firebase.firestore.FieldValue.serverTimestamp()};
- await db.collection('properties').add(d); alert('LIVE V4!'); openHolographic(d); load();
+ if(imgs.length==0) return alert('Add at least 1 image');
+ let d={ title:document.getElementById('title').value, price:Number(document.getElementById('price').value), beds:Number(document.getElementById('beds').value), city:document.getElementById('city').value, location:document.getElementById('city').value, images:imgs.slice(0,7), video:document.getElementById('video').value, model3d:document.getElementById('model').value, holoType:document.getElementById('holo').value, buildingType:document.getElementById('buildingType').value, desc:document.getElementById('desc').value, type:Number(document.getElementById('price').value)>=500000000?'AUCTION':'MALL', createdAt:firebase.firestore.FieldValue.serverTimestamp() };
+ await db.collection('properties').add(d); alert('LIVE V6 Dynamic! Building type: '+d.buildingType); openHolographic(d); load();
 }
 async function load(){
  let s=await db.collection('properties').orderBy('createdAt','desc').limit(50).get();
  document.getElementById('list').innerHTML=s.docs.map(doc=>{
    let d=doc.data();
-   return `<div style="background:#222;padding:10px;margin:6px 0;border-radius:8px;display:flex;justify-content:space-between"><div><b>${d.title||''}</b> - ₦${(d.price||0).toLocaleString()}<br><button onclick='openHolographic({title:"${(d.title||'').replace(/"/g,'')}",model3d:"${(d.model3d||'').replace(/"/g,'')}",holoType:"${d.holoType||'wireframe}"})' style="background:#0ff;color:black;padding:4px 8px;border:none;border-radius:4px;margin-top:4px">View Hologram</button></div><button onclick="db.collection('properties').doc('${doc.id}').delete().then(()=>load())" style="background:red;color:white;padding:6px;border:none;border-radius:6px">DEL</button></div>`
+   return `<div style="background:#1a1a1a;padding:12px;margin:8px 0;border-radius:10px;display:flex;justify-content:space-between;border:1px solid #d4c2a020"><div><b>${d.title||''}</b><br><span style="font-size:10px;color:#d4c2a0">${(d.buildingType||'duplex').toUpperCase()} • ₦${(d.price||0).toLocaleString()}</span><br><button onclick='openHolographic({title:"${(d.title||'').replace(/"/g,'')}",model3d:"${(d.model3d||'').replace(/"/g,'')}",holoType:"${d.holoType||'wireframe}",buildingType:"${d.buildingType||'duplex}"})' style="background:#d4c2a0;color:black;padding:4px 10px;border:none;border-radius:6px;margin-top:6px;font-size:11px;font-weight:bold">View Dynamic Hologram</button></div><button onclick="db.collection('properties').doc('${doc.id}').delete().then(()=>load())" style="background:#ff4444;color:white;padding:6px 10px;border:none;border-radius:6px;height:fit-content">DEL</button></div>`
  }).join('');
 }
 load();

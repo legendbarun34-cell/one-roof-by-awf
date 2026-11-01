@@ -1,44 +1,29 @@
 <!DOCTYPE html><html lang="en"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ONE ROOF by AWF — KYC Verified Auctions</title>
+<title>ONE ROOF by AWF — KYC Verified Auctions | oneroofbyawf.com</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://js.paystack.co/v1/inline.js"></script>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Inter:wght@300;400&display=swap" rel="stylesheet">
 <style>body{font-family:'Inter',sans-serif;background:#0A0A0A;color:#E8DCC6}.serif{font-family:'Cormorant Garamond',serif}.border-gold{border-color:rgba(201,169,110,0.25)}.bg-gold{background:#C9A96E}.tab-active{border-bottom:1px solid #C9A96E;color:#C9A96E}.tab-idle{opacity:0.4}input,select,textarea{background:#111;border:1px solid rgba(201,169,110,0.2);color:#E8DCC6}</style>
 </head><body class="antialiased">
-
-<header class="border-b border-gold sticky top-0 bg-[#0A0A0A]/95 backdrop-blur z-50"><div class="max-w-[1600px] mx-auto px-8 py-5 flex justify-between items-center"><div class="serif"><div class="text-[28px] tracking-[0.15em]">ONE ROOF</div><div class="text-[11px] tracking-[0.3em] opacity-60">by AWF • KYC VERIFIED</div></div><div class="flex gap-3"><button onclick="openKYC()" class="bg-[#C9A96E] text-black px-6 py-2 text-[11px] tracking-widest">KYC VERIFY + 10M DEPOSIT</button><button onclick="openModal('menu')" class="lg:hidden border border-gold px-3 py-1 text-[11px]">MENU</button></div></div></header>
-
+<header class="border-b border-gold sticky top-0 bg-[#0A0A0A]/95 backdrop-blur z-50"><div class="max-w-[1600px] mx-auto px-8 py-5 flex justify-between items-center"><div class="serif"><div class="text-[28px] tracking-[0.15em]">ONE ROOF</div><div class="text-[11px] tracking-[0.3em] opacity-60">by AWF • KYC VERIFIED • oneroofbyawf.com</div></div><div class="flex gap-3"><button onclick="openKYC()" class="bg-[#C9A96E] text-black px-6 py-2 text-[11px] tracking-widest">KYC VERIFY + 10M DEPOSIT</button><a href="admin.html" class="border border-gold px-4 py-2 text-[10px] opacity-60">ADMIN</a></div></div></header>
 <section class="text-center pt-16 pb-8 px-6 max-w-6xl mx-auto">
 <h1 class="serif text-[42px] md:text-[56px] font-light leading-[0.95]">Exceptional Properties. Exclusive Auctions.</h1>
 <p class="mt-6 text-[13px] opacity-60 max-w-3xl mx-auto">Mall: 20K listings (20M-499M) free access. Auction: 500M+ only — KYC + 10M NGN deposit required — Filters billionaires only.</p>
-<div class="mt-8 grid grid-cols-3 border-y border-gold py-6 max-w-2xl mx-auto"><div><p class="serif text-[22px]">20K+</p><p class="text-[10px]">MALL FREE</p></div><div class="border-x border-gold"><p class="serif text-[22px] text-[#C9A96E]">500M+</p><p class="text-[10px]">AUCTION KYC</p></div><div><p class="serif text-[22px]">10M</p><p class="text-[10px]">DEPOSIT</p></div></div>
+<div class="mt-8 grid grid-cols-3 border-y border-gold py-6 max-w-2xl mx-auto"><div><p class="serif text-[22px]" id="mallCount">20K+</p><p class="text-[10px]">MALL FREE</p></div><div class="border-x border-gold"><p class="serif text-[22px] text-[#C9A96E]" id="auctionCount">3</p><p class="text-[10px]">AUCTION KYC</p></div><div><p class="serif text-[22px]">10M</p><p class="text-[10px]">DEPOSIT</p></div></div>
 <div class="mt-8 flex justify-center gap-4"><button onclick="openKYC()" class="bg-[#C9A96E] text-black px-10 py-3 text-[11px] tracking-widest">VERIFY & PAY 10M DEPOSIT</button><button onclick="switchTab('mall')" class="border border-gold px-10 py-3 text-[11px]">BROWSE MALL FREE</button></div>
+<input id="search" oninput="filterProperties()" placeholder="Search by City, Title, Price..." class="mt-8 w-full max-w-2xl mx-auto block px-5 py-3 text-[13px] rounded-full border border-gold/30">
 </section>
-
 <div class="max-w-[1600px] mx-auto px-8 flex justify-center gap-10 border-b border-gold/20 py-4 sticky top-[72px] bg-[#0A0A0A] z-40">
 <button id="tab-live" onclick="switchTab('live')" class="tab-active serif text-[17px] pb-2">🔴 AUCTIONS 500M+ (KYC)</button>
 <button id="tab-mall" onclick="switchTab('mall')" class="tab-idle serif text-[17px] pb-2">MALL 20M-499M (FREE)</button>
 </div>
-
-<section id="live" class="px-8 max-w-[1600px] mx-auto py-10">
-<div class="grid md:grid-cols-3 gap-6">
-<div class="bg-[#111] border border-gold"><div class="aspect-[16/10] relative"><img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1000" class="w-full h-full object-cover"><div class="absolute top-3 left-3 bg-red-600 text-white px-2 py-1 text-[10px] animate-pulse">LIVE • 12:04:21</div><div class="absolute top-3 right-3 bg-black px-2 py-1 text-[10px] border border-gold">KYC REQUIRED</div></div><div class="p-5 text-center"><h3 class="serif text-[17px]">Guzape 5BR — 1.3B NGN</h3><p class="text-[11px] opacity-50">Current 1.18B • 14 KYC bidders</p><button onclick="checkKYC('Guzape 1.3B')" class="mt-4 w-full bg-[#C9A96E] text-black py-3 text-[11px] tracking-widest">JOIN LIVE VIDEO (KYC)</button><button onclick="checkKYC('Guzape bid')" class="mt-2 w-full border border-gold py-2.5 text-[11px]">+100M BID (KYC + 10M)</button></div></div>
-<div class="bg-[#111] border border-white/10"><div class="aspect-[16/10] relative"><img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1000" class="w-full h-full object-cover"><div class="absolute top-3 left-3 bg-red-600 px-2 py-1 text-[10px]">LIVE • 06:32:10</div></div><div class="p-5 text-center"><h3 class="serif text-[17px]">Asokoro 6BR — 2.1B</h3><button onclick="checkKYC('Asokoro 2.1B')" class="mt-4 w-full bg-[#C9A96E] text-black py-3 text-[11px]">JOIN LIVE VIDEO (KYC)</button></div></div>
-<div class="bg-[#111] border border-white/10"><div class="aspect-[16/10] relative"><img src="https://images.unsplash.com/photo-1600607688969-a5bfcd646154?w=1000" class="w-full h-full object-cover"><div class="absolute top-3 left-3 bg-red-600 px-2 py-1 text-[10px]">LIVE • 03:18:55</div></div><div class="p-5 text-center"><h3 class="serif text-[17px]">Banana Island — 5.2B</h3><button onclick="checkKYC('Banana 5.2B')" class="mt-4 w-full bg-[#C9A96E] text-black py-3 text-[11px]">JOIN LIVE VIDEO (KYC)</button></div></div>
-</div>
-</section>
-
-<section id="mall" class="px-8 max-w-[1600px] mx-auto py-10 bg-[#080808] border-t border-gold hidden">
-<h2 class="serif text-[28px]">Mall — 20,000 Listings (20M-499M) — Free Access</h2><div id="mallGrid" class="grid md:grid-cols-4 gap-4 mt-6"></div>
-</section>
-
-<!-- KYC + DEPOSIT MODAL -->
+<section id="live" class="px-8 max-w-[1600px] mx-auto py-10"><div id="liveGrid" class="grid md:grid-cols-3 gap-6"></div></section>
+<section id="mall" class="px-8 max-w-[1600px] mx-auto py-10 bg-[#080808] border-t border-gold hidden"><h2 class="serif text-[28px]">Mall — Listings (20M-499M) — Free Access</h2><div id="mallGrid" class="grid md:grid-cols-4 gap-4 mt-6"></div></section>
 <div id="kycModal" class="fixed inset-0 bg-black/90 backdrop-blur hidden z-[200] flex items-start md:items-center justify-center p-4 overflow-y-auto">
 <div class="bg-[#0F0F0F] border border-gold max-w-lg w-full my-8"><div class="p-8">
 <div class="flex justify-between"><h2 class="serif text-[26px]">KYC Verification + 10M Deposit</h2><button onclick="closeKYC()" class="opacity-50">✕</button></div>
 <p class="text-[11px] tracking-widest opacity-50 mt-2">REQUIRED FOR ALL 500M+ AUCTIONS • NDA PROTECTED • REFUNDABLE IF NO WIN</p>
-
 <div class="mt-6 space-y-4">
 <input id="kFullName" placeholder="Full Legal Name *" class="w-full px-4 py-3 text-[13px] outline-none">
 <input id="kCompany" placeholder="Family Office / Company Name" class="w-full px-4 py-3 text-[13px] outline-none">
@@ -46,59 +31,53 @@
 <select id="kFunds" class="w-full px-4 py-3 text-[13px]"><option>Proof of Funds Range *</option><option>500M - 1B NGN</option><option>1B - 3B NGN</option><option>3B - 10B NGN</option><option>10B+ NGN</option></select>
 <select id="kSource" class="w-full px-4 py-3 text-[13px]"><option>Source of Funds *</option><option>Real Estate Portfolio</option><option>Oil & Gas</option><option>Family Office</option><option>Private Equity</option><option>Other</option></select>
 <textarea id="kIntent" placeholder="Which auction interested? e.g. Guzape 1.3B" class="w-full px-4 py-3 text-[13px] h-20"></textarea>
-<label class="flex gap-3 items-start text-[11px] leading-relaxed mt-2"><input id="kNDA" type="checkbox" class="mt-1"> <span>I agree to NDA: All bids, bidder identities, and auction data are confidential. I consent to KYC verification. I understand 10M NGN deposit is refundable if I don't win, forfeited if I win and fail to complete. I am principal buyer or authorized family office representative. *</span></label>
+<label class="flex gap-3 items-start text-[11px] leading-relaxed mt-2"><input id="kNDA" type="checkbox" class="mt-1"> <span>I agree to NDA + KYC verification. 10M deposit refundable if no win, forfeited if win and fail to complete. *</span></label>
 </div>
-
 <div class="mt-8 border-t border-gold pt-6">
-<p class="text-[11px] tracking-widest">STEP 2: PAY 10M NGN REFUNDABLE DEPOSIT</p><p class="text-[10px] opacity-40 mt-1">Paystack secured • Goes to awfrealestatelimited@gmail.com account • Receipt auto-sent</p>
+<p class="text-[11px] tracking-widest">STEP 2: PAY 10M NGN REFUNDABLE DEPOSIT</p>
 <div class="mt-4 grid grid-cols-2 gap-3"><button onclick="payDeposit()" class="bg-[#C9A96E] text-black py-4 text-[12px] tracking-widest font-bold">PAY 10M NGN WITH PAYSTACK</button><button onclick="whatsappKYC()" class="border border-gold py-4 text-[11px]">WHATSAPP KYC INSTEAD</button></div>
-<p class="text-[10px] opacity-30 mt-3 text-center">After payment, you get private video link + bidding paddle number via WhatsApp 08102837598 within 5 mins</p>
+<p class="text-[10px] opacity-30 mt-3 text-center">Manual: Send 10M to your bank — Send receipt to 08102837598 for video link if Paystack pending activation</p>
 </div>
-
 </div></div>
 </div>
-
 <div id="modal" class="fixed inset-0 bg-black/85 backdrop-blur hidden z-[100] flex items-center justify-center p-6"><div class="bg-[#111] border border-gold max-w-md w-full p-8 text-center"><h3 id="mTitle" class="serif text-[22px]"></h3><p id="mText" class="text-[13px] opacity-70 mt-4"></p><div id="mActions" class="mt-6"></div><button onclick="closeModal()" class="mt-6 text-[11px] opacity-40">CLOSE</button></div></div>
-
-<footer class="border-t border-gold py-8 px-8 text-center mt-20"><p class="text-[11px] opacity-50">KYC + 10M Deposit Required for 500M+ Auctions • Mall Free • NDA Protected • awfrealestatelimited@gmail.com • 08102837598</p></footer>
-
+<a href="https://wa.me/2348102837598?text=Hi%20AWF%20OneRoof%20—%20I%20want%20to%20bid" class="fixed bottom-6 right-6 bg-[#25D366] text-black px-5 py-3 rounded-full text-[12px] font-bold z-50 shadow-lg">WHATSAPP: 08102837598</a>
+<footer class="border-t border-gold py-8 px-8 text-center mt-20"><p class="text-[11px] opacity-50">KYC + 10M Deposit • Mall Free • NDA • awfrealestatelimited@gmail.com • 08102837598 • Admin: admin.html</p></footer>
 <script>
 let isKYCVerified = localStorage.getItem('awf_kyc')==='verified';
-let mallAssets=[{t:"Wuye 4BR Terrace",p:"320M",c:"Wuye"},{t:"Lugbe 3BR",p:"45M",c:"Lugbe"},{t:"Jahi 3BR Flat",p:"85M",c:"Jahi"},{t:"Kubwa 2BR",p:"1.2M/yr",c:"Kubwa"}];
-function renderMall(){document.getElementById('mallGrid').innerHTML=mallAssets.map(a=>`<div class="bg-[#111] border border-white/5 p-0"><img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=600" class="w-full h-40 object-cover"><div class="p-4"><p class="serif text-[14px]">${a.t}</p><p class="text-[11px] opacity-50">${a.c} · ${a.p} · Mall Only</p><button onclick="whatsapp('Enquiry: ${a.t}')" class="mt-3 w-full py-2 border border-white/10 text-[11px]">ENQUIRE FREE</button></div></div>`).join('');}
+let defaultLive=[{id:1,title:"Guzape 5BR — 1.3B NGN",price:1300000000,city:"Guzape",beds:5,image:"https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1000",current:"1.18B",bidders:14,time:"12:04:21"},{id:2,title:"Asokoro 6BR — 2.1B",price:2100000000,city:"Asokoro",beds:6,image:"https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1000",time:"06:32:10"},{id:3,title:"Banana Island — 5.2B",price:5200000000,city:"Banana Island",beds:8,image:"https://images.unsplash.com/photo-1600607688969-a5bfcd646154?w=1000",time:"03:18:55"}];
+let defaultMall=[{title:"Wuye 4BR Terrace",price:320000000,city:"Wuye",beds:4,image:"https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=600"},{title:"Lugbe 3BR",price:45000000,city:"Lugbe",beds:3,image:"https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=600"},{title:"Jahi 3BR Flat",price:85000000,city:"Jahi",beds:3,image:"https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=600"},{title:"Kubwa 2BR",price:1200000,city:"Kubwa",beds:2,image:"https://images.unsplash.com/photo-1564013799919-ab600027ffc6?w=600"}];
+function getAllProps(){
+  let adminProps = JSON.parse(localStorage.getItem('awf_props')||'[]');
+  let allLive = [...adminProps.filter(p=>p.price>=500000000).map(p=>({id:p.id,title:`${p.title} — ${(p.price/1000000000).toFixed(1)}B`,price:p.price,city:p.city,beds:p.beds,image:p.image||defaultLive[0].image,time:"LIVE",current:(p.price*0.9/1000000000).toFixed(2)+'B',bidders:Math.floor(Math.random()*20+2)})), ...defaultLive];
+  let allMall = [...adminProps.filter(p=>p.price<500000000), ...defaultMall];
+  return {live:allLive, mall:allMall};
+}
+let searchQuery="";
+function renderAll(){
+  let {live, mall} = getAllProps();
+  if(searchQuery){let q=searchQuery.toLowerCase();live=live.filter(p=>(p.title+p.city).toLowerCase().includes(q));mall=mall.filter(p=>(p.title+p.city).toLowerCase().includes(q));}
+  document.getElementById('auctionCount').textContent=live.length;
+  document.getElementById('mallCount').textContent=mall.length;
+  document.getElementById('liveGrid').innerHTML=live.map(a=>`<div class="bg-[#111] border border-gold"><div class="aspect-[16/10] relative"><img src="${a.image}" class="w-full h-full object-cover"><div class="absolute top-3 left-3 bg-red-600 text-white px-2 py-1 text-[10px] animate-pulse">LIVE • ${a.time}</div><div class="absolute top-3 right-3 bg-black px-2 py-1 text-[10px] border border-gold">KYC REQUIRED</div></div><div class="p-5 text-center"><h3 class="serif text-[17px]">${a.title}</h3><p class="text-[11px] opacity-50">${a.city} • Current ${a.current||''} • ${a.bidders||5} KYC</p><button onclick="checkKYC('${a.title.replace(/'/g,'')}')" class="mt-4 w-full bg-[#C9A96E] text-black py-3 text-[11px] tracking-widest">JOIN LIVE VIDEO (KYC)</button><button onclick="checkKYC('${a.title.replace(/'/g,'')} bid')" class="mt-2 w-full border border-gold py-2.5 text-[11px]">+100M BID (KYC + 10M)</button></div></div>`).join('');
+  document.getElementById('mallGrid').innerHTML=mall.map(a=>`<div class="bg-[#111] border border-white/5 p-0"><img src="${a.image}" class="w-full h-40 object-cover"><div class="p-4"><p class="serif text-[14px]">${a.title}</p><p class="text-[11px] opacity-50">${a.city} · ${a.beds}BR · ₦${Number(a.price).toLocaleString()}</p><button onclick="whatsapp('Enquiry: ${a.title} - ${a.city} - ₦${a.price}')" class="mt-3 w-full py-2 border border-white/10 text-[11px]">ENQUIRE FREE</button></div></div>`).join('');
+}
+function filterProperties(){searchQuery=document.getElementById('search').value;renderAll();}
 function switchTab(t){document.getElementById('live').classList.toggle('hidden',t!=='live');document.getElementById('mall').classList.toggle('hidden',t!=='mall');document.getElementById('tab-live').className=t=='live'?'tab-active serif text-[17px] pb-2':'tab-idle serif text-[17px] pb-2';document.getElementById('tab-mall').className=t=='mall'?'tab-active serif text-[17px] pb-2':'tab-idle serif text-[17px] pb-2';}
 function openKYC(){document.getElementById('kycModal').classList.remove('hidden');}
 function closeKYC(){document.getElementById('kycModal').classList.add('hidden');}
 function checkKYC(item){if(isKYCVerified){joinVideo(item);}else{openKYC();}}
-function joinVideo(item){openModal('Verified ✓ Access Granted — '+item,'Private video link: https://youtube.com/live/your-auction<br><br>Paddle Number: AWF-'+Math.floor(Math.random()*900+100)+'<br><br>WhatsApp concierge for live support: 08102837598','<button onclick="whatsapp(\'Verified: '+item+'\')" class="w-full bg-gold text-black py-3 text-[11px]">OPEN WHATSAPP VIDEO ROOM</button>');}
+function joinVideo(item){openModal('Verified ✓ Access Granted — '+item,'Private video link: https://youtube.com/live/your-auction<br><br>Paddle Number: AWF-'+Math.floor(Math.random()*900+100)+'<br><br>WhatsApp: 08102837598','<button onclick="whatsapp(\'Verified: '+item+'\')" class="w-full bg-gold text-black py-3 text-[11px]">OPEN WHATSAPP VIDEO ROOM</button>');}
 function payDeposit(){
-let name=document.getElementById('kFullName').value;
-let email=document.getElementById('kEmail').value;
-let phone=document.getElementById('kPhone').value;
-let nda=document.getElementById('kNDA').checked;
-if(!name||!email||!phone){alert('Fill Full Name, Email, Phone *');return;}
-if(!nda){alert('You must agree to NDA');return;}
-let handler=PaystackPop.setup({
-key:'pk_test_xxxxxxxxxxxxxxxx', // REPLACE WITH YOUR LIVE KEY FROM paystack.com
-email:email,
-amount:10000000*100,
-currency:'NGN',
-ref:''+Math.floor(Math.random()*1000000000+1),
-metadata:{custom_fields:[{display_name:"Full Name",variable_name:"full_name",value:name},{display_name:"Phone",variable_name:"phone",value:phone}]},
-callback:function(response){localStorage.setItem('awf_kyc','verified');isKYCVerified=true;alert('Payment successful! Ref: '+response.reference+'. You are now KYC verified. You will receive private video link via WhatsApp within 5 mins.');closeKYC();joinVideo('Guzape 1.3B');},
-onClose:function(){alert('Payment cancelled. You can also WhatsApp KYC to 08102837598');}
-});
+let name=document.getElementById('kFullName').value;let email=document.getElementById('kEmail').value;let phone=document.getElementById('kPhone').value;let nda=document.getElementById('kNDA').checked;
+if(!name||!email||!phone){alert('Fill Full Name, Email, Phone *');return;}if(!nda){alert('You must agree to NDA');return;}
+let PAYSTACK_KEY = localStorage.getItem('paystack_live_key')||'pk_test_xxxxxxxxxxxxxxxx';
+let handler=PaystackPop.setup({key:PAYSTACK_KEY,email:email,amount:10000000*100,currency:'NGN',ref:''+Math.floor(Math.random()*1000000000+1),metadata:{custom_fields:[{display_name:"Full Name",variable_name:"full_name",value:name}]},callback:function(response){localStorage.setItem('awf_kyc','verified');isKYCVerified=true;alert('Payment successful! Ref: '+response.reference+'. Verified!');closeKYC();joinVideo('Guzape 1.3B');},onClose:function(){alert('Cancelled. WhatsApp KYC to 08102837598');}});
 handler.openIframe();
 }
-function whatsappKYC(){
-let name=document.getElementById('kFullName').value||'';
-let phone=document.getElementById('kPhone').value||'';
-let email=document.getElementById('kEmail').value||'';
-let funds=document.getElementById('kFunds').value||'';
-window.open('https://wa.me/2348102837598?text='+encodeURIComponent(`KYC REQUEST — ONE ROOF by AWF\nName: ${name}\nPhone: ${phone}\nEmail: ${email}\nFunds: ${funds}\nDeposit: 10M NGN\nEmail: awfrealestatelimited@gmail.com\nPlease verify me for 500M+ auction`), '_blank');
-}
+function whatsappKYC(){let name=document.getElementById('kFullName').value||'';let phone=document.getElementById('kPhone').value||'';let email=document.getElementById('kEmail').value||'';window.open('https://wa.me/2348102837598?text='+encodeURIComponent(`KYC REQUEST — ONE ROOF by AWF\nName: ${name}\nPhone: ${phone}\nEmail: ${email}\nDeposit: 10M`), '_blank');}
 function whatsapp(m){window.open('https://wa.me/2348102837598?text='+encodeURIComponent(m),'_blank');}
 function openModal(t,m,a){document.getElementById('mTitle').innerHTML=t;document.getElementById('mText').innerHTML=m;document.getElementById('mActions').innerHTML=a||'';document.getElementById('modal').classList.remove('hidden');}
 function closeModal(){document.getElementById('modal').classList.add('hidden');}
-renderMall();
+renderAll();
 </script></body></html>

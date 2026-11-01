@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>AWF Admin - Add Properties</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+body{font-family:Inter,sans-serif;background:#0a0a0a;color:white;padding:20px}
+.card{background:#1a1a1a;padding:20px;border-radius:12px;max-width:600px;margin:auto}
+input,select,textarea{width:100%;padding:12px;margin:8px 0;border-radius:8px;border:1px solid #333;background:#222;color:white}
+button{background:#FFD700;color:black;padding:14px;width:100%;border:none;border-radius:8px;font-weight:bold;cursor:pointer;margin-top:10px}
+.item{background:#222;padding:12px;border-radius:8px;margin:10px 0;display:flex;justify-content:space-between}
+.badge{padding:4px 10px;border-radius:20px;font-size:12px}
+.mall{background:green} .auction{background:red}
+</style>
+</head>
+<body>
+<div class="card" id="loginBox">
+<h2>AWF Admin Login</h2>
+<input type="password" id="pass" placeholder="Enter Admin Password">
+<button onclick="login()">Login</button>
+<p style="font-size:12px;color:#888">Default: AWF2026</p>
+</div>
+
+<div class="card" id="adminBox" style="display:none">
+<h2>Add New Property - AWF OneRoof</h2>
+<input id="title" placeholder="Title e.g. 5 Bedroom Duplex Guzape">
+<input id="price" type="number" placeholder="Price e.g. 650000000">
+<input id="city" placeholder="City e.g. Abuja, Guzape">
+<input id="beds" type="number" placeholder="Bedrooms">
+<input id="image" placeholder="Image URL (from Google Drive or Cloudinary)">
+<textarea id="desc" placeholder="Description"></textarea>
+<button onclick="addProperty()">ADD PROPERTY</button>
+<p id="autoRule" style="color:#FFD700;font-weight:bold;margin-top:10px"></p>
+
+<h3 style="margin-top:30px">Your Listings (<span id="count">0</span>)</h3>
+<div id="list"></div>
+<button onclick="exportJSON()" style="background:white">EXPORT FOR MAIN SITE</button>
+</div>
+
+<script>
+let props = JSON.parse(localStorage.getItem('awf_props')||'[]');
+
+function login(){
+ if(document.getElementById('pass').value==='AWF2026'){
+   document.getElementById('loginBox').style.display='none';
+   document.getElementById('adminBox').style.display='block';
+   render();
+ } else alert('Wrong password');
+}
+
+document.getElementById('price').addEventListener('input',()=>{
+ let p = Number(document.getElementById('price').value);
+ let rule = document.getElementById('autoRule');
+ if(p>=500000000){ rule.textContent='=> AUTO: Will go to LIVE AUCTION (BID + VIDEO)'; rule.style.color='#ff4444'; }
+ else if(p>0){ rule.textContent='=> AUTO: Will go to MALL (ENQUIRE only)'; rule.style.color='#44ff44'; }
+ else rule.textContent='';
+});
+
+function addProperty(){
+ let p = {
+  id: Date.now(),
+  title: document.getElementById('title').value,
+  price: Number(document.getElementById('price').value),
+  city: document.getElementById('city').value,
+  beds: document.getElementById('beds').value,
+  image: document.getElementById('image').value,
+  desc: document.getElementById('desc').value,
+  type: Number(document.getElementById('price').value)>=500000000?'AUCTION':'MALL',
+  date: new Date().toLocaleDateString()
+ };
+ if(!p.title||!p.price) return alert('Add title and price');
+ props.unshift(p);
+ localStorage.setItem('awf_props',JSON.stringify(props));
+ render();
+ document.getElementById('title').value='';document.getElementById('price').value='';
+ alert('Added! '+p.type);
+}
+
+function render(){
+ document.getElementById('count').textContent=props.length;
+ document.getElementById('list').innerHTML=props.map(x=>`
+  <div class="item">
+   <div><b>${x.title}</b><br><small>${x.city} - ₦${x.price.toLocaleString()}</small></div>
+   <div><span class="badge ${x.type==='MALL'?'mall':'auction'}">${x.type}</span><br><button onclick="del(${x.id})" style="padding:4px;font-size:10px;background:red;color:white;margin-top:5px">DELETE</button></div>
+  </div>
+ `).join('');
+}
+
+function del(id){ props=props.filter(x=>x.id!==id); localStorage.setItem('awf_props',JSON.stringify(props)); render(); }
+function exportJSON(){ 
+ let data = JSON.stringify(props,null,2);
+ let blob = new Blob([data],{type:'application/json'});
+ let a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='awf-listings.json'; a.click();
+}
+</script>
+</body>
+</html>

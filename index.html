@@ -1,31 +1,120 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>ONE ROOF by AWF</title><script src="https://cdn.tailwindcss.com"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.160.0/three.min.js"></script><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&family=Inter:wght@300;400&display=swap" rel="stylesheet"><style>body{font-family:'Inter',sans-serif;background:#060605;color:#e8dcc6;margin:0;scroll-behavior:smooth}.serif{font-family:'Cormorant Garamond',serif}.gold-border{border:1px solid #d4c2a0;box-shadow:0 0 20px rgba(212,194,160,0.15)}#holoCanvas{width:100%!important;height:100%!important;display:block}</style></head><body class="bg-[#060605]">
-<header class="sticky top-0 z-50 px-4 lg:px-20 py-4 flex justify-between items-center bg-[#060605]/95 backdrop-blur border-b border-[#d4c2a0]/10"><div onclick="window.scrollTo(0,0)"><h1 class="serif text-[26px] tracking-[0.08em] text-[#d4c2a0] leading-none">ONE ROOF</h1><p class="serif text-[11px] tracking-[0.2em] text-[#d4c2a0]/80 ml-6">BY AWF</p></div><nav class="flex items-center gap-4 text-[10px] tracking-[0.12em] text-[#e8dcc6]/90"><a href="#home">HOME</a><a href="#auctions">AUCTIONS</a><a href="#properties">PROPERTIES</a><a href="admin.html" class="px-4 py-2 border border-[#d4c2a0]/60 rounded-[6px] text-[#d4c2a0]">LOGIN</a></nav></header>
-<section id="home" class="px-4 lg:px-20 pt-8 pb-4 text-center"><h2 class="serif text-[20px] lg:text-[32px] text-[#d4c2a0]">Exceptional Properties • Exclusive Auctions</h2><p class="text-[10px] text-[#e8dcc6]/70 mt-2">Bid on premium properties worldwide. Secure, transparent, and LIVE via holographic auctions.</p><div class="flex justify-center gap-8 mt-6 max-w-xl mx-auto"><div class="text-center"><p class="serif text-[18px] text-[#d4c2a0] font-[600]">20,000+<br>20,000+</p><p class="text-[9px] text-white/50">listings</p></div><div class="w-px h-10 bg-[#d4c2a0]/20"></div><div class="text-center"><p class="serif text-[18px] text-[#d4c2a0] font-[600]">1B+<br>1B+</p><p class="text-[9px] text-white/50">live auctions</p></div><div class="w-px h-10 bg-[#d4c2a0]/20"></div><div class="text-center"><p class="serif text-[18px] text-[#d4c2a0] font-[600]">150+<br>150+</p><p class="text-[9px] text-white/50">cities</p></div></div></section>
-<div class="px-4 lg:px-20 mt-4 flex justify-between items-center"><p class="text-[9px] tracking-[0.2em] text-[#d4c2a0]/80">LIVE NOW • FEATURED AUCTIONS</p><button onclick="document.getElementById('searchBar').classList.toggle('hidden')" class="text-[9px] tracking-widest text-[#d4c2a0] border border-[#d4c2a0]/30 px-2 py-1 rounded-full">🔍 SEARCH</button></div>
-<div id="searchBar" class="hidden px-4 lg:px-20 py-3 bg-[#0e0e0c] border-b border-[#d4c2a0]/20"><input id="searchInput" type="text" placeholder="Search bungalow, duplex, high-rise, Lekki..." class="w-full px-4 py-3 bg-[#1a1a1a] border border-[#333] rounded-[8px] text-[12px] text-[#d4c2a0]" oninput="filterProperties()"></div>
-<section id="auctions" class="px-4 lg:px-20 mt-3"><div id="featured" class="grid grid-cols-1 md:grid-cols-3 gap-4"></div></section>
-<div id="properties"></div>
-<section id="hologram" class="px-4 lg:px-20 mt-6 pb-8"><div class="relative gold-border rounded-[12px] overflow-hidden bg-[#061414]" style="height:340px"><canvas id="holoCanvas"></canvas><div class="absolute top-3 left-1/2 -translate-x-1/2 text-center pointer-events-none"><p class="serif text-[12px] text-[#d4c2a0]">— Holographic Building Structure • Dynamic —</p><p class="text-[9px] text-[#d4c2a0]/70">Transforms to match selected property</p></div><div class="absolute left-2 top-1/2 -translate-y-1/2 border border-[#d4c2a0]/30 bg-black/40 px-2 py-1 rounded-[4px]"><p class="text-[7px] text-[#d4c2a0]/70">PROPERTY TYPE:<br>SELECTED →<br><span id="leftType" class="text-[#d4c2a0] font-bold text-[8px]">SKYSCRAPER</span></p></div><div class="absolute right-2 top-1/2 -translate-y-1/2"><p class="text-[7px] text-[#d4c2a0]/50">TRANSFORM:<br>DUPLEX / BUNGALOW /<br>SKYSCRAPER</p></div><div class="absolute bottom-2 left-2 text-[8px] text-[#d4c2a0]/50">Floors: <span id="floorCount">42</span> • <span id="holoTitle">ONE ROOF Building</span></div></div></section>
-<footer class="text-center py-4"><p class="text-[9px] text-[#d4c2a0]/40">© 2024 ONE ROOF by AWF • <a href="admin.html" class="underline">Admin - Add Properties Here</a></p></footer>
-<script>
-let allProperties=[{title:'Modern Duplex Tower Victoria Island',city:'Victoria Island',price:450000000,beds:4,buildingType:'duplex',images:['https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600']},{title:'Bungalow with Roof Lekki Phase 1',city:'Lekki Phase 1',price:180500000,beds:3,buildingType:'bungalow',images:['https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600']},{title:'High-Rise Skyscraper Penthouse Ikoyi',city:'Ikoyi',price:1250000000,beds:5,buildingType:'highrise',images:['https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=600']}];
-function filterProperties(){const q=document.getElementById('searchInput').value.toLowerCase(); const f=allProperties.filter(p=>(p.title+' '+p.city+' '+p.buildingType).toLowerCase().includes(q)); renderProperties(f);}
-function renderProperties(list){const featured=document.getElementById('featured'); featured.innerHTML=''; list.forEach(p=>{const img=(p.images||[])[0]; const badge=(p.buildingType||'duplex').toUpperCase(); const card=document.createElement('div'); card.className='bg-[#0e0e0c] gold-border rounded-[12px] p-2 pb-3 overflow-hidden'; card.innerHTML=`<div class="relative rounded-[8px] overflow-hidden h-[140px]"><img src="${img}" class="w-full h-full object-cover"><div class="absolute top-1 left-1 bg-black/80 border border-white/20 rounded-[4px] px-1 py-0.5 text-[7px] text-white">LIVE<br>02:14:33</div><div class="absolute top-1 right-1 bg-[#d4c2a0]/90 text-black px-1 py-0.5 rounded-[3px] text-[8px] font-bold">₦${Number(p.price).toLocaleString()}</div><div class="absolute bottom-1 left-1 bg-[#d4c2a0] text-black px-1 py-0.5 rounded-[3px] text-[7px] font-black">${badge}</div></div><div class="text-center mt-2"><h3 class="text-[11px] text-white leading-tight">${p.title}<br><span class="text-[9px] text-white/40">${p.city}</span></h3><p class="text-[9px] text-white/50 mt-1">${p.beds} Bed • ${p.city}</p><p class="serif text-[12px] text-[#d4c2a0] font-[600] mt-1">₦${Number(p.price).toLocaleString()}</p><button onclick="selectProperty('${p.buildingType}','${p.title}')" class="mt-2 w-full bg-gradient-to-b from-[#d4c2a0] to-[#b8a080] text-black text-[10px] font-[700] py-2 rounded-[5px]">VIEW HOLOGRAM</button></div>`; featured.appendChild(card);});}
-const canvas=document.getElementById('holoCanvas'); let scene,camera,renderer,group,rotY=0,auto=true; let buildings={}; function init(){scene=new THREE.Scene(); camera=new THREE.PerspectiveCamera(35, canvas.clientWidth/340, 0.1, 100); camera.position.set(0,3,12); camera.lookAt(0,0,0); renderer=new THREE.WebGLRenderer({canvas, alpha:true, antialias:true}); renderer.setSize(canvas.clientWidth,340); renderer.setClearColor(0x000000,0); group=new THREE.Group(); scene.add(group); createBuildings(); animate();} function createWireBox(w,h,d,c,o){const geo=new THREE.BoxGeometry(w,h,d); const edges=new THREE.EdgesGeometry(geo); return new THREE.LineSegments(edges, new THREE.LineBasicMaterial({color:c, transparent:true, opacity:o}));} function createBuildings(){while(group.children.length>0) group.remove(group.children[0]); const t1=new THREE.Group(); t1.position.set(-2.2,1.2,-0.8); t1.add(createWireBox(0.9,4,0.9,0xffd700,0.9)); group.add(t1); buildings.highrise=t1; const t2=new THREE.Group(); t2.position.set(-0.8,0.6,-0.2); t2.add(createWireBox(1.1,2.8,1.1,0xd4c2a0,0.5)); group.add(t2); buildings.duplex=t2; const b=new THREE.Group(); b.position.set(1.6,0.2,0.4); b.add(createWireBox(3,1.1,2,0xffd700,1)); const roofGeo=new THREE.ConeGeometry(2,0.8,4); const roof=new THREE.LineSegments(new THREE.EdgesGeometry(roofGeo), new THREE.LineBasicMaterial({color:0xffd700})); roof.position.y=0.95; roof.rotation.y=Math.PI/4; b.add(roof); group.add(b); buildings.bungalow=b; highlight('highrise');} function highlight(type){Object.keys(buildings).forEach(k=>{const a=k===type || (type==='villa'&&k==='bungalow') || (type==='chateau'&&k==='duplex'); buildings[k].children.forEach(c=>{if(c.material){c.material.opacity=a?1:0.2; if(c.material.color) c.material.color.set(a?0xffd700:0x444444);}});});} function animate(){requestAnimationFrame(animate); if(auto) rotY+=0.004; if(group) group.rotation.y=rotY; renderer.render(scene,camera);} init(); window.selectProperty=function(t,ttl){highlight(t); document.getElementById('leftType').innerText=t.toUpperCase(); document.getElementById('floorCount').innerText=t==='highrise'?'42':t==='duplex'?'5':'1'; document.getElementById('holoTitle').innerText=ttl; auto=false; setTimeout(()=>auto=true,3000); document.getElementById('hologram').scrollIntoView({behavior:'smooth'});}
-renderProperties(allProperties);
-</script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ONE ROOF by AWF | Advanced Holographic Auctions</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script type="importmap">{"imports":{"three":"https://unpkg.com/three@0.160.0/build/three.module.js","three/addons/":"https://unpkg.com/three@0.160.0/examples/jsm/"}}</script>
+<style>body{background:#050a0f;color:#c8f0ff;font-family:Inter;margin:0}#holoCanvas{width:100%!important;height:100%!important}</style>
+</head>
+<body class="bg-[#050a0f]">
+<header class="sticky top-0 z-50 px-6 py-4 flex justify-between items-center bg-[#050a0f]/90 backdrop-blur border-b border-cyan-400/20">
+<div><h1 class="text-[28px] tracking-widest text-cyan-300 font-bold">ONE ROOF <span class="text-[11px] text-cyan-300/60 ml-2">BY AWF • V9 ADVANCED</span></h1></div>
+<div class="flex gap-4 text-[11px]"><button onclick="openPartner()" class="px-4 py-2 border border-cyan-400 text-cyan-300 rounded-full">PARTNER PORTAL</button><a href="admin.html" class="px-4 py-2 bg-cyan-400 text-black font-bold rounded-full">ADMIN LOGIN</a></div>
+</header>
+
+<!-- SEARCH + FILTERS -->
+<div class="px-6 py-3 flex gap-3 bg-[#08121a] border-b border-cyan-400/10"><input id="search" oninput="filter()" placeholder="Search duplex, bungalow, high-rise, location..." class="flex-1 px-4 py-2 bg-black/40 border border-cyan-400/20 rounded text-[12px] text-cyan-200"><select id="typeFilter" onchange="filter()" class="px-3 py-2 bg-black/40 border border-cyan-400/20 rounded text-cyan-200 text-[11px]"><option value="">All Types</option><option value="duplex">Duplex</option><option value="bungalow">Bungalow</option><option value="highrise">High-Rise</option><option value="villa">Villa</option><option value="chateau">Chateau</option></select></div>
+
+<!-- FEATURED -->
+<section class="px-6 mt-4"><p class="text-[10px] tracking-[0.3em] text-cyan-300/60">LIVE NOW • FEATURED AUCTIONS • REAL-TIME WEBSOCKET SYNC</p><div id="grid" class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-3"></div></section>
+
+<!-- HOLOGRAPHIC STAGE - BLUE GLOW SHADER -->
+<section class="px-6 mt-6 pb-10"><div class="relative border border-cyan-400/30 rounded-xl overflow-hidden bg-[#061a24] shadow-[0_0_50px_rgba(0,240,255,0.15)]" style="height:420px"><canvas id="holoCanvas"></canvas>
+<div class="absolute top-3 left-1/2 -translate-x-1/2 text-center pointer-events-none"><p class="text-[13px] text-cyan-300 tracking-widest">— Holographic Building Structure • Dynamic Shader • GLTF —</p><p id="holoName" class="text-[10px] text-cyan-300/60">Select property to load 3D model</p></div>
+<div class="absolute left-3 bottom-3 text-[9px] text-cyan-300/50">WebGL • Three.js • Blender GLTF • <span id="bidStatus">Awaiting Bid</span> • Floors: <span id="floors">--</span></div>
+<div class="absolute right-3 top-3 flex gap-2"><button onclick="loadModel('duplex')" class="text-[8px] px-2 py-1 bg-cyan-400/20 border border-cyan-400 rounded text-cyan-300">DUPLEX</button><button onclick="loadModel('bungalow')" class="text-[8px] px-2 py-1 bg-cyan-400/20 border border-cyan-400 rounded text-cyan-300">BUNGALOW</button><button onclick="loadModel('highrise')" class="text-[8px] px-2 py-1 bg-cyan-400/20 border border-cyan-400 rounded text-cyan-300">HIGH-RISE</button></div>
+</div></section>
+
+<!-- LIVE AUCTION MODAL -->
+<div id="auctionModal" class="hidden fixed inset-0 z-[100] bg-black/90 flex items-center justify-center p-4"><div class="bg-[#0a1a24] border border-cyan-400 rounded-xl p-6 max-w-lg w-full"><h3 id="aucTitle" class="text-cyan-300 text-[18px]">Live Auction</h3><div id="videoWrap" class="mt-3 hidden"><iframe id="videoPlayer" class="w-full h-[200px] rounded" frameborder="0" allowfullscreen></iframe></div><p id="aucPrice" class="text-[24px] text-white font-bold mt-3">₦0</p><p id="aucTimer" class="text-[12px] text-red-400 mt-1">00:00:00</p><div id="payWall" class=""><p class="text-[11px] text-yellow-300 mt-3">🔒 Pay ₦5,000 entry fee to bid (Stripe)</p><button onclick="payEntry()" class="w-full mt-2 py-3 bg-yellow-400 text-black font-bold rounded">PAY TO ENTER LIVE ROOM</button></div><div id="bidPanel" class="hidden"><div id="bidFeed" class="h-[80px] overflow-y-auto bg-black/30 rounded p-2 mt-3 text-[10px] text-cyan-200"></div><div class="flex gap-2 mt-3"><input id="bidInput" type="number" placeholder="Your bid NGN" class="flex-1 px-3 py-2 bg-black border border-cyan-400/30 rounded text-cyan-200"><button onclick="placeBid()" class="px-6 py-2 bg-cyan-400 text-black font-bold rounded">BID NOW</button></div></div><button onclick="closeAuction()" class="w-full mt-4 py-2 border border-cyan-400/30 text-cyan-300 rounded text-[11px]">CLOSE</button></div></div>
+
+<!-- PARTNER PORTAL -->
+<div id="partnerModal" class="hidden fixed inset-0 z-[100] bg-black/90 flex items-center justify-center p-4"><div class="bg-[#0a1a24] border border-cyan-400 rounded-xl p-6 max-w-md w-full"><h3 class="text-cyan-300">Agent / Partner Portal</h3><p class="text-[10px] text-cyan-200/60 mt-2">Submit property for approval • Earn 80% commission via Stripe Connect • Your tracking link:</p><p id="partnerLink" class="text-[10px] bg-black p-2 rounded mt-2 break-all text-cyan-300"></p><input id="pTitle" placeholder="Property title" class="w-full mt-3 px-3 py-2 bg-black border border-cyan-400/20 rounded text-[12px]"><input id="pPrice" type="number" placeholder="Price" class="w-full mt-2 px-3 py-2 bg-black border border-cyan-400/20 rounded text-[12px]"><button onclick="submitPartner()" class="w-full mt-3 py-2 bg-cyan-400 text-black font-bold rounded">SUBMIT FOR APPROVAL</button><button onclick="closePartner()" class="w-full mt-2 py-2 border border-cyan-400/30 text-cyan-300 rounded">CLOSE</button></div></div>
+
 <script type="module">
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js';
-import { getFirestore, collection, query, orderBy, onSnapshot } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
+import { getFirestore, collection, query, orderBy, onSnapshot, addDoc, serverTimestamp, doc, updateDoc, arrayUnion } from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js';
+
 const firebaseConfig = { apiKey: "AIzaSyCaT7A33x93pBgSUhBZOPbKX6egSgLqDLI", authDomain: "awf-oneroof.firebaseapp.com", projectId: "awf-oneroof", storageBucket: "awf-oneroof.firebasestorage.app", messagingSenderId: "752950974508", appId: "1:752950974508:web:52b693571800a0835a9989", measurementId: "G-T1L6D42RZX" };
 const app = initializeApp(firebaseConfig); const db = getFirestore(app);
-try{
-const q = query(collection(db, "properties"), orderBy('createdAt','desc'));
-onSnapshot(q, snap=>{
-  if(snap.empty) return;
-  let list=[]; snap.forEach(d=>{let data=d.data(); list.push(data);});
-  if(list.length>0){ allProperties=list; renderProperties(allProperties); }
+
+let allProps=[]; let currentAuction=null; let hasPaid=false;
+let scene,camera,renderer,group,rotY=0; const canvas=document.getElementById('holoCanvas');
+const loader=new GLTFLoader();
+
+// BLUE GLOW SHADER MATERIAL
+const glowMaterial = new THREE.ShaderMaterial({
+  uniforms:{ glowColor:{value:new THREE.Color(0x00f0ff)}, opacity:{value:0.8}},
+  vertexShader:`varying vec3 vNormal; void main(){ vNormal = normalize(normalMatrix * normal); gl_Position = projectionMatrix * modelViewMatrix * vec4(position,1.0); }`,
+  fragmentShader:`uniform vec3 glowColor; uniform float opacity; varying vec3 vNormal; void main(){ float intensity = pow(0.6 - dot(vNormal, vec3(0,0,1)), 2.0); vec3 glow = glowColor * intensity; gl_FragColor = vec4(glow, opacity * intensity); }`,
+  transparent:true, side:THREE.DoubleSide
 });
-}catch(e){ console.log('Using demo data'); }
+
+function init3D(){
+  scene=new THREE.Scene(); camera=new THREE.PerspectiveCamera(40, canvas.clientWidth/420, 0.1, 100); camera.position.set(0,4,10); renderer=new THREE.WebGLRenderer({canvas, alpha:true, antialias:true}); renderer.setSize(canvas.clientWidth,420); renderer.setClearColor(0x061a24,1); group=new THREE.Group(); scene.add(group); animate(); buildProc('duplex');
+}
+function buildProc(type){
+  while(group.children.length>0) group.remove(group.children[0]);
+  let geo, mesh;
+  if(type==='bungalow'){ geo=new THREE.BoxGeometry(4.5,1.2,3); mesh=new THREE.Mesh(geo, new THREE.MeshBasicMaterial({color:0x00f0ff, wireframe:true, transparent:true, opacity:0.6})); const roof=new THREE.Mesh(new THREE.ConeGeometry(2.5,0.8,4), new THREE.MeshBasicMaterial({color:0x00f0ff, wireframe:true})); roof.position.y=1; roof.rotation.y=Math.PI/4; group.add(roof); }
+  else if(type==='highrise'){ geo=new THREE.BoxGeometry(1.5,8,1.5); mesh=new THREE.Mesh(geo, new THREE.MeshBasicMaterial({color:0x00f0ff, wireframe:true, transparent:true, opacity:0.7})); }
+  else if(type==='villa'){ geo=new THREE.BoxGeometry(3,2.5,3); mesh=new THREE.Mesh(geo, new THREE.MeshBasicMaterial({color:0x00f0ff, wireframe:true, opacity:0.6})); }
+  else { geo=new THREE.BoxGeometry(2.2,4,2.2); mesh=new THREE.Mesh(geo, new THREE.MeshBasicMaterial({color:0x00f0ff, wireframe:true, opacity:0.6})); }
+  group.add(mesh);
+  // Glow edges
+  const edges=new THREE.LineSegments(new THREE.EdgesGeometry(geo), new THREE.LineBasicMaterial({color:0x00f0ff})); group.add(edges);
+  document.getElementById('holoName').innerText=type.toUpperCase() + ' • Blue Wireframe Shader Active • GLTF Ready';
+  document.getElementById('floors').innerText=type==='highrise'?'42':type==='duplex'?'5':'1';
+}
+window.loadModel=(type, glbUrl=null)=>{
+  if(glbUrl){ loader.load(glbUrl, gltf=>{ while(group.children.length>0) group.remove(group.children[0]); gltf.scene.traverse(c=>{ if(c.isMesh){ c.material=glowMaterial.clone(); }}); group.add(gltf.scene); }); } else buildProc(type);
+  document.getElementById('bidStatus').innerText='Loaded: '+type;
+}
+function animate(){ requestAnimationFrame(animate); rotY+=0.008; if(group) group.rotation.y=rotY; renderer.render(scene,camera); }
+init3D();
+
+// PARTNER TRACKING
+const partnerId = new URLSearchParams(location.search).get('partner') || localStorage.getItem('partnerRef');
+if(partnerId) localStorage.setItem('partnerRef', partnerId);
+window.openPartner=()=>{ const pid='PARTNER_'+Math.random().toString(36).substr(2,6).toUpperCase(); document.getElementById('partnerLink').innerText=location.origin+location.pathname+'?partner='+pid; document.getElementById('partnerModal').classList.remove('hidden'); }
+window.closePartner=()=>document.getElementById('partnerModal').classList.add('hidden');
+window.submitPartner=async()=>{ const title=document.getElementById('pTitle').value; const price=Number(document.getElementById('pPrice').value); await addDoc(collection(db,'partnerSubmissions'),{title, price, partnerRef:localStorage.getItem('partnerRef')||'DIRECT', status:'pending', createdAt:serverTimestamp()}); alert('Submitted for approval! Commission 80% via Stripe Connect'); closePartner(); }
+
+window.payEntry=()=>{ hasPaid=true; document.getElementById('payWall').classList.add('hidden'); document.getElementById('bidPanel').classList.remove('hidden'); alert('Payment verified (Replace with Stripe Checkout link). You can now bid live.'); }
+window.closeAuction=()=>document.getElementById('auctionModal').classList.add('hidden');
+window.placeBid=async()=>{ if(!hasPaid) return alert('Pay entry first'); const amount=Number(document.getElementById('bidInput').value); if(!amount) return; await updateDoc(doc(db,'properties',currentAuction.id),{ currentBid:amount, bids:arrayUnion({amount, time:Date.now(), user:'Guest_'+Math.random().toString(36).substr(2,4)}) }); }
+
+function render(list){
+  const grid=document.getElementById('grid'); grid.innerHTML='';
+  list.forEach(p=>{
+    const img=(p.images||[])[0]||'https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600';
+    const card=document.createElement('div'); card.className='bg-[#0a1a24] border border-cyan-400/20 rounded-xl p-2';
+    card.innerHTML=`<div class="relative h-[140px] rounded-lg overflow-hidden cursor-pointer" onclick="openAuction('${p.id}')"><img src="${img}" class="w-full h-full object-cover"><div class="absolute top-1 left-1 bg-black/80 px-1 py-0.5 text-[8px] text-cyan-300 rounded">LIVE ${p.buildingType||'duplex'}</div><div class="absolute bottom-1 right-1 bg-cyan-400 text-black px-2 py-0.5 rounded text-[10px] font-bold">₦${Number(p.price||p.currentBid||0).toLocaleString()}</div></div><p class="text-[11px] text-white mt-2">${p.title}</p><p class="text-[9px] text-cyan-200/50">${p.city} • ${p.buildingType||'duplex'}</p><div class="flex gap-2 mt-2"><button onclick="loadModel('${p.buildingType||'duplex'}','${p.model3d||''}'); openAuction('${p.id}')" class="flex-1 py-2 bg-cyan-400/20 border border-cyan-400 text-cyan-300 text-[10px] rounded">VIEW HOLOGRAM + VIDEO</button></div>`;
+    grid.appendChild(card);
+  });
+}
+window.openAuction=async(id)=>{
+  const prop=allProps.find(x=>x.id===id); if(!prop) return; currentAuction=prop; document.getElementById('aucTitle').innerText=prop.title; document.getElementById('aucPrice').innerText='₦'+Number(prop.price).toLocaleString(); document.getElementById('auctionModal').classList.remove('hidden');
+  // VIDEO INTEGRATION
+  if(prop.video){ document.getElementById('videoWrap').classList.remove('hidden'); let vid=prop.video; if(vid.includes('youtube.com')||vid.includes('youtu.be')){ let ytId=vid.split('v=')[1]||vid.split('/').pop(); ytId=ytId.split('&')[0]; document.getElementById('videoPlayer').src='https://www.youtube.com/embed/'+ytId; } else document.getElementById('videoPlayer').src=vid; } else document.getElementById('videoWrap').classList.add('hidden');
+  loadModel(prop.buildingType, prop.model3d);
+  // LIVE TIMER
+  let end=Date.now()+1000*60*60*2; setInterval(()=>{ let diff=end-Date.now(); if(diff<0) {document.getElementById('aucTimer').innerText='🔴 LIVE BIDDING'; document.getElementById('bidStatus').innerText='LIVE'} else { let h=Math.floor(diff/3600000), m=Math.floor((diff%3600000)/60000), s=Math.floor((diff%60000)/1000); document.getElementById('aucTimer').innerText=`${h}:${m}:${s} until live`; } },1000);
+}
+window.filter=()=>{ const q=document.getElementById('search').value.toLowerCase(); const t=document.getElementById('typeFilter').value.toLowerCase(); render(allProps.filter(p=>{ const txt=(p.title+' '+p.city+' '+p.buildingType).toLowerCase(); return (!q||txt.includes(q)) && (!t|| (p.buildingType||'').toLowerCase().includes(t)); })); }
+
+// FIREBASE REAL-TIME = WEBSOCKETS
+const q=query(collection(db,'properties'), orderBy('createdAt','desc'));
+onSnapshot(q, snap=>{
+  allProps=[]; snap.forEach(d=>{ let data=d.data(); data.id=d.id; allProps.push(data); });
+  if(allProps.length===0){ allProps=[{id:'demo1',title:'Modern Duplex Tower Victoria Island',city:'Victoria Island',price:450000000,buildingType:'duplex',images:['https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600'],video:'https://www.youtube.com/watch?v=dQw4w9WgXcQ',model3d:''},{id:'demo2',title:'Bungalow with Roof Lekki Phase 1',city:'Lekki Phase 1',price:180500000,buildingType:'bungalow',images:['https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=600']},{id:'demo3',title:'High-Rise Skyscraper Penthouse Ikoyi',city:'Ikoyi',price:1250000000,buildingType:'highrise',images:['https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=600']}]; }
+  render(allProps);
+  // LIVE BID FEED
+  if(currentAuction){ const upd=allProps.find(x=>x.id===currentAuction.id); if(upd&&upd.bids){ document.getElementById('bidFeed').innerHTML=upd.bids.slice(-5).map(b=>`💎 ₦${Number(b.amount).toLocaleString()} by ${b.user}`).join('<br>'); document.getElementById('aucPrice').innerText='₦'+Number(upd.currentBid||upd.price).toLocaleString(); }}
+});
 </script>
-</body></html>
+</body>
+</html>

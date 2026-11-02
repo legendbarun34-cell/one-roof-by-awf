@@ -1,35 +1,165 @@
-<!DOCTYPE html><html><head><title>AWF Admin V8.1 - Add Properties</title><meta name="viewport" content="width=device-width, initial-scale=1"><script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.160.0/three.min.js"></script><style>body{font-family:Inter;background:#060605;color:#e8dcc6;padding:10px;margin:0}input,textarea,select{width:100%;padding:12px;background:#1a1a1a;color:#e8dcc6;border:1px solid #333;border-radius:8px;margin:6px 0;font-size:13px}button{cursor:pointer}#wireCanvas{width:100%!important;height:300px!important;display:block}</style><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500&display=swap" rel="stylesheet"></head><body>
-<div id="holoWrap" style="width:100%;height:320px;background:radial-gradient(ellipse at center,#0a2a2a,#060605);border:1px solid #d4c2a050;display:none;position:relative;border-radius:12px;overflow:hidden;margin-bottom:12px"><canvas id="wireCanvas"></canvas><div style="position:absolute;bottom:8px;left:50%;transform:translateX(-50%);background:rgba(212,194,160,0.12);border:1px solid #d4c2a0;padding:4px 10px;font-size:9px;color:#d4c2a0;border-radius:12px">PREVIEW • DRAG TO ROTATE</div><div style="position:absolute;top:8px;right:8px;background:rgba(0,0,0,0.7);border:1px solid #d4c2a0;padding:4px 8px;font-size:9px;color:#d4c2a0;border-radius:8px"><span id="holoInfo">Duplex</span></div></div>
-<div style="max-width:700px;margin:auto;background:#111;padding:16px;border-radius:14px;border:1px solid #d4c2a020">
-<h2 style="color:#d4c2a0;font-size:20px;margin:0;font-family:'Cormorant Garamond'">ONE ROOF by AWF</h2><p style="font-size:11px;color:#d4c2a0;margin:2px 0 8px 0">V8.1 Admin - Add Properties • Where to add properties!</p><p style="font-size:10px;color:#666">Your site: legendbarun34-cell.github.io/o/ • This admin: /o/admin.html</p>
-<input id="pass" type="password" placeholder="Enter Password AWF2026"><button onclick="if(document.getElementById('pass').value==='AWF2026'){document.getElementById('main').style.display='block';document.getElementById('msg').innerText='✅ Unlocked V8.1 - You can now add properties that transform hologram!'}else alert('Wrong password - Use AWF2026')" style="background:#d4c2a0;color:black;font-weight:900;padding:10px;border:none;border-radius:8px;width:100%">LOGIN ADMIN V8.1</button><p id="msg" style="font-size:11px;color:#d4c2a0;text-align:center;margin-top:6px"></p>
-<div id="main" style="display:none;margin-top:12px">
-<input id="title" placeholder="Title e.g. Modern Duplex Tower Victoria Island">
-<div style="display:flex;gap:6px"><input id="price" type="number" placeholder="Price NGN e.g. 450000000"><input id="beds" type="number" placeholder="Beds e.g. 4"></div>
-<input id="city" placeholder="Location e.g. Victoria Island, Lagos or Guzape, Abuja">
-<label style="font-size:10px;color:#d4c2a0;margin-top:6px;display:block">🏗️ BUILDING TYPE - Controls Hologram Transform Below</label>
-<select id="buildingType" onchange="previewBuilding(this.value)" style="border:1px solid #d4c2a0;color:#d4c2a0;background:#1a1a12"><option value="duplex">Duplex - 5 Floors Tower</option><option value="bungalow">Bungalow - Single Floor + Roof</option><option value="highrise">High-Rise - 10 Floors Skyscraper (Penthouse)</option><option value="villa">Villa - 2 Floors Luxury</option><option value="chateau">Chateau / Mansion - Estate 3 Floors</option><option value="penthouse">Penthouse - Wide Terrace</option></select>
-<textarea id="imgs" rows="5" placeholder="PASTE IMAGE LINKS - 1 per line (from imgbb.com, unsplash, or your phone) - 1st image is main card image"></textarea>
-<input id="video" placeholder="YouTube Tour Link (Optional)">
-<input id="model" placeholder="3D GLB Model Link (Optional - overrides wireframe)">
-<select id="holo" style="border:1px solid #00ffff40;color:#0ff"><option value="wireframe">Auto Holographic Wireframe (Uses Building Type)</option><option value="glb">Use My GLB Model Link</option></select>
-<textarea id="desc" rows="2" placeholder="Description e.g. Luxury bungalow with modern finish, 3 beds..."></textarea>
-<button onclick="addLive()" style="background:linear-gradient(90deg,#d4c2a0,#b8a080);color:black;font-weight:900;padding:14px;border:none;border-radius:10px;width:100%;font-size:14px;margin-top:6px">🚀 ADD LIVE - Property Will Show on Main Site Instantly!</button>
-<div style="margin-top:8px;padding:8px;background:#060605;border-radius:6px;border:1px dashed #d4c2a030"><p style="font-size:10px;color:#d4c2a0">HOW TO ADD:</p><p style="font-size:9px;color:#888;margin-top:2px">1. Select Building Type → Preview transforms hologram above<br>2. Add title with type keyword (e.g. include 'Bungalow' for bungalow)<br>3. Paste image links → Add → Check main site https://legendbarun34-cell.github.io/o/<br>4. On main site click VIEW HOLOGRAM → Watch it transform!</p></div>
+<!DOCTYPE html>
+<html><head><title>AWF Admin V9 ADVANCED - Holographic Platform</title><meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.160.0/three.min.js"></script>
+<script type="importmap">{"imports":{"three":"https://unpkg.com/three@0.160.0/build/three.module.js","three/addons/":"https://unpkg.com/three@0.160.0/examples/jsm/"}}</script>
+<style>body{font-family:Inter;background:#050a0f;color:#c8f0ff;padding:10px;margin:0}input,textarea,select{width:100%;padding:12px;background:#0a1a24;color:#c8f0ff;border:1px solid #00f0ff30;border-radius:8px;margin:6px 0;font-size:13px}button{cursor:pointer}#wireCanvas{width:100%!important;height:320px!important;display:block}.tab{padding:8px 14px;border:1px solid #00f0ff40;border-radius:20px;font-size:11px;cursor:pointer;background:#061a24;color:#00f0ff}.tab.active{background:#00f0ff;color:#000;font-weight:bold}</style></head>
+<body>
+<!-- HOLOGRAPHIC PREVIEW - BLUE SHADER -->
+<div id="holoWrap" style="width:100%;height:340px;background:radial-gradient(ellipse at center,#061a24,#050a0f);border:1px solid #00f0ff50;display:none;position:relative;border-radius:14px;overflow:hidden;margin-bottom:12px;box-shadow:0 0 30px rgba(0,240,255,0.15)"><canvas id="wireCanvas"></canvas>
+<div style="position:absolute;top:10px;left:50%;transform:translateX(-50%);background:rgba(0,240,255,0.1);border:1px solid #00f0ff;padding:5px 12px;font-size:10px;color:#00f0ff;border-radius:20px;letter-spacing:0.1em">BLUE GLOW SHADER • GLTF READY • DRAG TO ROTATE</div>
+<div style="position:absolute;bottom:10px;left:10px;background:rgba(0,0,0,0.6);padding:4px 8px;font-size:9px;color:#00f0ff;border-radius:6px;border:1px solid #00f0ff30"><span id="holoInfo">Duplex • 5 Floors</span></div>
+<div style="position:absolute;bottom:10px;right:10px;display:flex;gap:4px"><button onclick="buildStructure('duplex')" style="font-size:8px;padding:4px 8px;background:#00f0ff20;border:1px solid #00f0ff;color:#00f0ff;border-radius:4px">DUPLEX</button><button onclick="buildStructure('bungalow')" style="font-size:8px;padding:4px 8px;background:#00f0ff20;border:1px solid #00f0ff;color:#00f0ff;border-radius:4px">BUNGALOW</button><button onclick="buildStructure('highrise')" style="font-size:8px;padding:4px 8px;background:#00f0ff20;border:1px solid #00f0ff;color:#00f0ff;border-radius:4px">HIGH-RISE</button></div>
+</div>
+
+<div style="max-width:900px;margin:auto;background:#08121a;padding:16px;border-radius:16px;border:1px solid #00f0ff15">
+<h2 style="color:#00f0ff;font-size:22px;margin:0;letter-spacing:0.1em">ONE ROOF by AWF</h2><p style="font-size:11px;color:#00f0ff;margin:2px 0 8px 0;letter-spacing:0.2em">V9 ADVANCED • HOLOGRAPHIC • LIVE AUCTIONS • PARTNER NETWORK • Stripe Connect Ready</p>
+<p style="font-size:9px;color:#666">Site: legendbarun34-cell.github.io/o/ • Admin: /o/admin.html • Stack: Three.js + GLTF + Firebase = WebSocket + Mux/Cloudinary + Stripe</p>
+
+<input id="pass" type="password" placeholder="Enter Password AWF2026"><button onclick="if(document.getElementById('pass').value==='AWF2026'){document.getElementById('main').style.display='block';document.getElementById('msg').innerText='✅ V9 Unlocked - Blue Holographic Platform Live!'}else alert('Wrong - AWF2026')" style="background:#00f0ff;color:black;font-weight:900;padding:12px;border:none;border-radius:8px;width:100%;letter-spacing:0.1em">UNLOCK V9 ADVANCED ADMIN</button>
+<p id="msg" style="font-size:11px;color:#00f0ff;text-align:center;margin-top:6px"></p>
+
+<div id="main" style="display:none;margin-top:16px">
+<!-- TABS -->
+<div style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px">
+<span class="tab active" onclick="showTab('add')" id="tabAdd">🏗️ ADD PROPERTY</span>
+<span class="tab" onclick="showTab('live')" id="tabLive">🔴 LIVE AUCTIONS</span>
+<span class="tab" onclick="showTab('partners')" id="tabPartners">🤝 PARTNERS</span>
+<span class="tab" onclick="showTab('ledger')" id="tabLedger">💰 COMMISSION LEDGER</span>
+</div>
+
+<!-- TAB 1: ADD PROPERTY -->
+<div id="tab-add">
+<input id="title" placeholder="Title e.g. Modern Duplex Tower Victoria Island - Use keywords for SEO">
+<div style="display:flex;gap:6px"><input id="price" type="number" placeholder="Reserve Price NGN"><input id="beds" type="number" placeholder="Beds"><input id="city" placeholder="City - Victoria Island"></div>
+
+<label style="font-size:10px;color:#00f0ff;margin-top:8px;display:block">🏗️ BUILDING TYPE - Controls Blue Holographic Shader (Dynamic GLTF)</label>
+<select id="buildingType" onchange="previewBuilding(this.value)" style="border:1px solid #00f0ff;color:#00f0ff;background:#061a24;font-weight:bold">
+<option value="duplex">Duplex - 5 Floors Tower (Default)</option>
+<option value="bungalow">Bungalow - Single Floor + Roof + Cone Shader</option>
+<option value="highrise">High-Rise - 10 Floors Skyscraper / Penthouse</option>
+<option value="villa">Villa - 2 Floors Luxury</option>
+<option value="chateau">Chateau / Mansion - Estate 3 Floors</option>
+<option value="penthouse">Penthouse - Wide Terrace</option>
+</select>
+
+<textarea id="imgs" rows="4" placeholder="IMAGE LINKS - 1 per line - 1st is main card - Use imgbb.com / Cloudinary (fast streaming)"></textarea>
+
+<label style="font-size:10px;color:#00f0ff;margin-top:6px;display:block">🎥 VIDEO PLAYER INTEGRATION - Cloudinary / Mux / YouTube (Replaces gallery when present)</label>
+<input id="video" placeholder="YouTube link e.g. https://youtube.com/watch?v=... OR Cloudinary MP4 link (Mux ready)">
+
+<label style="font-size:10px;color:#00f0ff;margin-top:6px;display:block">🧊 3D HOLOGRAPHIC MODEL - GLTF / GLB (Blender optimized - overrides wireframe with true glowing blue shader)</label>
+<input id="model" placeholder="GLTF/GLB Model Link e.g. https://your-cdn.com/building.glb (Blender export)">
+
+<div style="display:flex;gap:6px"><select id="holo" style="flex:1"><option value="wireframe">Auto Blue Wireframe Shader (uses buildingType)</option><option value="glb">Use My GLB Model + Blue Glow Shader</option></select><input id="auctionEnd" type="datetime-local" style="flex:1"></div>
+
+<textarea id="desc" rows="2" placeholder="Description - SEO optimized - e.g. Luxury bungalow with modern finish, Guzape, Abuja..."></textarea>
+
+<div style="display:flex;gap:6px;margin-top:8px"><input id="partnerRef" placeholder="Partner Ref (optional - for affiliate tracking ?partner=ID)"><input id="entryFee" type="number" placeholder="Entry Fee NGN - Paywall (default 5000)" value="5000"></div>
+
+<button onclick="addLive()" style="background:linear-gradient(90deg,#00f0ff,#00aaff);color:black;font-weight:900;padding:14px;border:none;border-radius:10px;width:100%;font-size:14px;margin-top:8px;letter-spacing:0.1em">🚀 ADD LIVE - INSTANT WEBSOCKET SYNC TO ALL USERS</button>
+</div>
+
+<!-- TAB 2: LIVE AUCTIONS -->
+<div id="tab-live" style="display:none">
+<h3 style="color:#00f0ff;font-size:14px">🔴 Live Auctions - Real-Time Bids (WebSocket = Firebase onSnapshot)</h3><p style="font-size:10px;color:#888">When user bids, all clients see instantly - Redis + WebSockets simulation - In production replace with Ably / Pusher</p>
+<div id="liveList"></div>
+</div>
+
+<!-- TAB 3: PARTNERS -->
+<div id="tab-partners" style="display:none">
+<h3 style="color:#00f0ff;font-size:14px">🤝 Partner Portal - Affiliate Sub-System</h3><p style="font-size:10px;color:#888">Partners submit properties for approval • Tracking via ?partner=ID • Stripe Connect split: Platform 20% / Partner 80%</p>
+<div id="partnerList"></div>
+</div>
+
+<!-- TAB 4: LEDGER -->
+<div id="tab-ledger" style="display:none">
+<h3 style="color:#00f0ff;font-size:14px">💰 Commission Ledger - Automated Split (Stripe Connect Ready)</h3><div id="ledgerList" style="background:#050a0f;padding:10px;border-radius:8px;border:1px solid #00f0ff20;font-size:11px"></div>
+<button onclick="exportLedger()" style="margin-top:8px;padding:8px 12px;background:#00f0ff20;border:1px solid #00f0ff;color:#00f0ff;border-radius:6px;font-size:10px">EXPORT CSV FOR STRIPE CONNECT</button>
+</div>
+
 <div id="list" style="margin-top:16px"></div>
 </div></div>
+
 <script>
 let scene,camera,renderer,group,rotY=0,auto=true,isDrag=false,prevX=0;
 const canvas=document.getElementById('wireCanvas');
-const buildingTypes={duplex:{w:2.6,h:5.2,d:2.6,name:'Duplex - 5 Floors'},bungalow:{w:4.5,h:1.4,d:3.5,name:'Bungalow - Wide + Roof'},highrise:{w:1.8,h:10,d:1.8,name:'High-Rise - 10 Floors'},villa:{w:4.2,h:3.2,d:4.2,name:'Villa - 2 Floors'},chateau:{w:5,h:4,d:4.5,name:'Chateau - Estate'},penthouse:{w:3.5,h:2,d:6,name:'Penthouse'}};
-function init(){scene=new THREE.Scene(); camera=new THREE.PerspectiveCamera(45, canvas.clientWidth/300, 0.1, 100); camera.position.set(0,6,12); camera.lookAt(0,0,0); renderer=new THREE.WebGLRenderer({canvas, alpha:true, antialias:true}); renderer.setSize(canvas.clientWidth,300); renderer.setClearColor(0x000000,0); group=new THREE.Group(); scene.add(group); buildStructure('duplex'); canvas.addEventListener('pointerdown', e=>{isDrag=true; auto=false; prevX=e.clientX;}); canvas.addEventListener('pointerup', ()=>{isDrag=false; setTimeout(()=>auto=true,2000);}); canvas.addEventListener('pointermove', e=>{if(!isDrag)return; rotY+=(e.clientX-prevX)*0.01; prevX=e.clientX;}); animate();}
+const buildingTypes={duplex:{w:2.6,h:5.2,d:2.6,name:'Duplex - 5 Floors'},bungalow:{w:4.5,h:1.4,d:3.5,name:'Bungalow - Wide + Roof'},highrise:{w:1.8,h:10,d:1.8,name:'High-Rise - 42 Floors'},villa:{w:4.2,h:3.2,d:4.2,name:'Villa - 2 Floors'},chateau:{w:5,h:4,d:4.5,name:'Chateau - Estate'},penthouse:{w:3.5,h:2,d:6,name:'Penthouse'}};
+
+function init(){
+scene=new THREE.Scene(); camera=new THREE.PerspectiveCamera(45, canvas.clientWidth/320, 0.1, 100); camera.position.set(0,6,12); camera.lookAt(0,0,0); renderer=new THREE.WebGLRenderer({canvas, alpha:true, antialias:true}); renderer.setSize(canvas.clientWidth,340); renderer.setClearColor(0x061a24,1); group=new THREE.Group(); scene.add(group); buildStructure('duplex');
+canvas.addEventListener('pointerdown', e=>{isDrag=true; auto=false; prevX=e.clientX;}); canvas.addEventListener('pointerup', ()=>{isDrag=false; setTimeout(()=>auto=true,2000);}); canvas.addEventListener('pointermove', e=>{if(!isDrag)return; rotY+=(e.clientX-prevX)*0.01; prevX=e.clientX;}); animate();
+}
 function clearGroup(){while(group.children.length>0) group.remove(group.children[0]);}
-function buildStructure(type){const cfg=buildingTypes[type]||buildingTypes.duplex; clearGroup(); const geo=new THREE.BoxGeometry(cfg.w,cfg.h,cfg.d); const edges=new THREE.EdgesGeometry(geo); const wire=new THREE.LineSegments(edges, new THREE.LineBasicMaterial({color:0xd4c2a0})); group.add(wire); if(type==='bungalow'){const rg=new THREE.ConeGeometry(cfg.w*0.8,0.8,4); const roof=new THREE.LineSegments(new THREE.EdgesGeometry(rg), new THREE.LineBasicMaterial({color:0xffd700})); roof.position.y=cfg.h/2+0.4; roof.rotation.y=Math.PI/4; group.add(roof);} const ring=new THREE.Mesh(new THREE.RingGeometry(Math.max(cfg.w,cfg.d),Math.max(cfg.w,cfg.d)+1,32), new THREE.MeshBasicMaterial({color:0xd4c2a0,side:THREE.DoubleSide,transparent:true,opacity:0.3})); ring.rotation.x=Math.PI/2; ring.position.y=-cfg.h/2-0.8; group.add(ring); document.getElementById('holoInfo').innerText=cfg.name;}
+function buildStructure(type){
+const cfg=buildingTypes[type]||buildingTypes.duplex; clearGroup();
+let geo=new THREE.BoxGeometry(cfg.w,cfg.h,cfg.d);
+let mat=new THREE.MeshBasicMaterial({color:0x00f0ff, wireframe:true, transparent:true, opacity:0.7});
+let mesh=new THREE.Mesh(geo, mat); group.add(mesh);
+let edges=new THREE.LineSegments(new THREE.EdgesGeometry(geo), new THREE.LineBasicMaterial({color:0x00f0ff, linewidth:2})); group.add(edges);
+if(type==='bungalow'){let rg=new THREE.ConeGeometry(cfg.w*0.7,0.9,4); let roof=new THREE.LineSegments(new THREE.EdgesGeometry(rg), new THREE.LineBasicMaterial({color:0x00f0ff})); roof.position.y=cfg.h/2+0.45; roof.rotation.y=Math.PI/4; group.add(roof);}
+let glow=new THREE.Mesh(new THREE.BoxGeometry(cfg.w*1.2,cfg.h*1.2,cfg.d*1.2), new THREE.MeshBasicMaterial({color:0x00f0ff, transparent:true, opacity:0.05, wireframe:true})); group.add(glow);
+document.getElementById('holoInfo').innerText=cfg.name+' • Blue Glow Shader Active';
+}
 function animate(){requestAnimationFrame(animate); if(auto) rotY+=0.01; if(group) group.rotation.y=rotY; if(renderer) renderer.render(scene,camera);} init();
 window.previewBuilding=function(t){document.getElementById('holoWrap').style.display='block'; buildStructure(t); document.getElementById('holoWrap').scrollIntoView({behavior:'smooth'});}
+window.buildStructure=buildStructure;
+
+function showTab(name){ document.querySelectorAll('[id^="tab-"]').forEach(el=>el.style.display='none'); document.getElementById('tab-'+name).style.display='block'; document.querySelectorAll('.tab').forEach(el=>el.classList.remove('active')); document.getElementById('tab'+name.charAt(0).toUpperCase()+name.slice(1)).classList.add('active'); if(name==='live') loadLive(); if(name==='partners') loadPartners(); if(name==='ledger') loadLedger(); }
+window.showTab=showTab;
+
 const firebaseConfig = { apiKey: "AIzaSyCaT7A33x93pBgSUhBZOPbKX6egSgLqDLI", authDomain: "awf-oneroof.firebaseapp.com", projectId: "awf-oneroof", storageBucket: "awf-oneroof.firebasestorage.app", messagingSenderId: "752950974508", appId: "1:752950974508:web:52b693571800a0835a9989", measurementId: "G-T1L6D42RZX" };
 firebase.initializeApp(firebaseConfig); const db=firebase.firestore();
-async function addLive(){let imgs=document.getElementById('imgs').value.split('\n').map(s=>s.trim()).filter(s=>s); if(imgs.length==0) return alert('Add at least 1 image link'); let d={title:document.getElementById('title').value, price:Number(document.getElementById('price').value), beds:Number(document.getElementById('beds').value), city:document.getElementById('city').value, location:document.getElementById('city').value, images:imgs.slice(0,7), video:document.getElementById('video').value, model3d:document.getElementById('model').value, holoType:document.getElementById('holo').value, buildingType:document.getElementById('buildingType').value, desc:document.getElementById('desc').value, type:Number(document.getElementById('price').value)>=500000000?'AUCTION':'MALL', createdAt:firebase.firestore.FieldValue.serverTimestamp()}; await db.collection('properties').add(d); alert('✅ LIVE! Added '+d.title+' as '+d.buildingType+' - Check main site now!'); previewBuilding(d.buildingType); load();}
-async function load(){let s=await db.collection('properties').orderBy('createdAt','desc').limit(30).get(); document.getElementById('list').innerHTML=s.docs.map(doc=>{let d=doc.data(); return `<div style="background:#1a1a1a;padding:10px;margin:6px 0;border-radius:8px;display:flex;justify-content:space-between;border:1px solid #d4c2a020"><div><b style="font-size:12px">${d.title||''}</b><br><span style="font-size:9px;color:#d4c2a0">${(d.buildingType||'duplex').toUpperCase()} • ₦${(d.price||0).toLocaleString()} • ${d.city||''}</span><br><button onclick="previewBuilding('${d.buildingType||'duplex'}')" style="background:#d4c2a0;color:black;padding:3px 8px;border:none;border-radius:4px;margin-top:4px;font-size:10px;font-weight:bold">Preview Hologram</button></div><button onclick="if(confirm('Delete this property?')){db.collection('properties').doc('${doc.id}').delete().then(()=>load())}" style="background:#ff4444;color:white;padding:4px 8px;border:none;border-radius:4px;height:fit-content;font-size:10px">DEL</button></div>`}).join('');}
+
+async function addLive(){
+let imgs=document.getElementById('imgs').value.split('\n').map(s=>s.trim()).filter(s=>s);
+if(imgs.length==0) return alert('Add at least 1 image link - Use Cloudinary for fast streaming');
+let d={
+title:document.getElementById('title').value, price:Number(document.getElementById('price').value), beds:Number(document.getElementById('beds').value), city:document.getElementById('city').value, location:document.getElementById('city').value,
+images:imgs.slice(0,7), video:document.getElementById('video').value, model3d:document.getElementById('model').value, holoType:document.getElementById('holo').value, buildingType:document.getElementById('buildingType').value, desc:document.getElementById('desc').value,
+type:Number(document.getElementById('price').value)>=500000000?'AUCTION':'MALL', entryFee:Number(document.getElementById('entryFee').value)||5000, partnerRef:document.getElementById('partnerRef').value||'DIRECT',
+currentBid:Number(document.getElementById('price').value), bids:[], auctionEnd:document.getElementById('auctionEnd').value?new Date(document.getElementById('auctionEnd').value):null,
+createdAt:firebase.firestore.FieldValue.serverTimestamp(), status:'live'
+};
+await db.collection('properties').add(d);
+// Commission ledger entry
+let platformFee = d.price * 0.2; let partnerEarn = d.price * 0.8;
+await db.collection('partnerCommissions').add({propertyTitle:d.title, total:d.price, platformFee, partnerEarn, partnerRef:d.partnerRef, createdAt:firebase.firestore.FieldValue.serverTimestamp()});
+alert('✅ LIVE! Blue Holographic + Video + WebSocket Live Auction Active! '+d.title+' as '+d.buildingType+' - Check main site!');
+previewBuilding(d.buildingType); load();
+}
+
+async function load(){
+let s=await db.collection('properties').orderBy('createdAt','desc').limit(30).get();
+document.getElementById('list').innerHTML='<h3 style="color:#00f0ff;font-size:12px;margin-top:12px">All Properties - Click Preview to test Blue Shader</h3>'+s.docs.map(doc=>{
+let d=doc.data(); return `<div style="background:#0a1a24;padding:10px;margin:6px 0;border-radius:8px;display:flex;justify-content:space-between;border:1px solid #00f0ff20"><div><b style="font-size:12px;color:#c8f0ff">${d.title||''}</b><br><span style="font-size:9px;color:#00f0ff">${(d.buildingType||'duplex').toUpperCase()} • ₦${(d.price||0).toLocaleString()} • ${d.city||''} • Video: ${d.video?'YES':'NO'} • GLB: ${d.model3d?'YES':'NO'} • Partner: ${d.partnerRef||'DIRECT'}</span><br><button onclick="previewBuilding('${d.buildingType||'duplex'}')" style="background:#00f0ff;color:black;padding:3px 8px;border:none;border-radius:4px;margin-top:4px;font-size:10px;font-weight:bold">Preview Blue Hologram</button> <button onclick="navigator.clipboard.writeText('${location.origin}/o/?partner=${d.partnerRef||'DIRECT'}');alert('Partner link copied!')" style="background:#00f0ff20;border:1px solid #00f0ff;color:#00f0ff;padding:3px 8px;border-radius:4px;font-size:9px">Copy Partner Link</button></div><button onclick="if(confirm('Delete?')){db.collection('properties').doc('${doc.id}').delete().then(()=>load())}" style="background:#ff3344;color:white;padding:4px 8px;border:none;border-radius:4px;height:fit-content;font-size:10px">DEL</button></div>`
+}).join('');
+}
+async function loadLive(){
+let s=await db.collection('properties').orderBy('createdAt','desc').limit(20).get();
+document.getElementById('liveList').innerHTML=s.docs.map(doc=>{
+let d=doc.data(); let bids=(d.bids||[]).slice(-3).map(b=>`₦${Number(b.amount).toLocaleString()} by ${b.user}`).join('<br>')||'No bids yet - WebSocket waiting...';
+return `<div style="background:#0a1a24;padding:10px;margin:6px 0;border-radius:8px;border:1px solid #00f0ff20"><b>${d.title}</b> • Current: ₦${Number(d.currentBid||d.price||0).toLocaleString()}<br><span style="font-size:10px;color:#00f0ff">Bids (real-time):<br>${bids}</span><br><span style="font-size:9px;color:#888">Entry Fee: ₦${d.entryFee||5000} • Paywall: Stripe Ready</span></div>`
+}).join('');
+}
+async function loadPartners(){
+let s=await db.collection('partnerSubmissions').orderBy('createdAt','desc').limit(30).get();
+document.getElementById('partnerList').innerHTML=s.docs.map(doc=>{
+let d=doc.data(); return `<div style="background:#0a1a24;padding:8px;margin:6px 0;border-radius:8px;display:flex;justify-content:space-between"><div><b style="font-size:11px">${d.title||''}</b><br><span style="font-size:9px;color:#00f0ff">${d.partnerRef} • ${d.status} • ₦${(d.price||0).toLocaleString()}</span></div><div><button onclick="db.collection('partnerSubmissions').doc('${doc.id}').update({status:'approved'}).then(()=>loadPartners())" style="background:#00f0ff;color:black;padding:4px 8px;border:none;border-radius:4px;font-size:9px">APPROVE</button></div></div>`
+}).join('')||'<p style="font-size:10px;color:#666">No partner submissions yet - Share ?partner=YOUR_ID link from main site</p>';
+}
+async function loadLedger(){
+let s=await db.collection('partnerCommissions').orderBy('createdAt','desc').limit(50).get();
+let totalPlatform=0, totalPartner=0;
+let rows=s.docs.map(doc=>{
+let d=doc.data(); totalPlatform+=d.platformFee||0; totalPartner+=d.partnerEarn||0;
+return `<tr><td style="padding:4px;border-bottom:1px solid #00f0ff10">${d.propertyTitle||''}</td><td>₦${(d.total||0).toLocaleString()}</td><td>₦${(d.platformFee||0).toLocaleString()}</td><td>₦${(d.partnerEarn||0).toLocaleString()}</td><td>${d.partnerRef||''}</td></tr>`
+}).join('');
+document.getElementById('ledgerList').innerHTML=`<table style="width:100%;font-size:10px"><tr style="color:#00f0ff"><th>Property</th><th>Total</th><th>Platform 20%</th><th>Partner 80%</th><th>Ref</th></tr>${rows}</table><div style="margin-top:10px;color:#00f0ff;font-weight:bold">Total Platform: ₦${totalPlatform.toLocaleString()} • Total Partners: ₦${totalPartner.toLocaleString()} • Stripe Connect will auto-split this</div>`;
+}
+window.exportLedger=()=>{ alert('In production: Export CSV for Stripe Connect payout - Connect API will handle split automatically'); }
+window.addLive=addLive;
 load();
-</script></body></html>
+</script>
+</body></html>
